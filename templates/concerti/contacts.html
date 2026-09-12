@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Contacts — Ramificazioni{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>Contacts</h1>
+  <p>Email: <a href="mailto:info@ramificazioni.ch">info@ramificazioni.ch</a></p>
+  <p>Instagram: <a href="https://www.instagram.com/ramificazioni.festival" target="_blank" rel="noopener">@ramificazioni.festival</a></p>
+</section>
+
+<section>
+  <h2>{% trans "Sede dei concerti" %}</h2>
+  <p class="supporters-note">{% trans "La sede è indicata nella scheda di ogni singolo concerto (può cambiare da un'edizione all'altra)." %}</p>
+</section>
+
+<section>
+  <h2>{% trans "Newsletter" %}</h2>
+  <p class="supporters-note">{% trans "Iscrizione avvisi nuova stagione/concerto — da collegare a un servizio di invio email." %}</p>
+</section>
+
+{% endblock %}

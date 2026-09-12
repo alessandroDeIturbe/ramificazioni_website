@@ -1,0 +1,197 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-12 18:02+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid ""
+"Ramificazioni è una rassegna indipendente di musica da camera contemporanea "
+"ed elettroacustica."
+msgstr ""
+"Ramificazioni est une série de concerts indépendante de musique de chambre "
+"contemporaine et électroacoustique."
+
+msgid "Navigazione principale"
+msgstr "Navigation principale"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "About"
+msgstr "À propos"
+
+msgid "Events"
+msgstr "Concerts"
+
+msgid "Contacts"
+msgstr "Contact"
+
+msgid "Contributors"
+msgstr "Contributeurs"
+
+msgid ""
+"Rassegna indipendente di musica da camera contemporanea/elettroacustica"
+msgstr ""
+"Série de concerts indépendante de musique de chambre "
+"contemporaine/électroacoustique"
+
+msgid "Privacy"
+msgstr "Confidentialité"
+
+msgid "Impressum"
+msgstr "Mentions légales"
+
+msgid "Loghi sostenitori/partner — da confermare"
+msgstr "Logos des partenaires/sponsors — à confirmer"
+
+msgid ""
+"Ramificazioni è una rassegna <strong>indipendente</strong> di musica da "
+"camera contemporanea ed elettroacustica: quattro concerti a stagione, ognuno"
+" con un proprio compositore in cartellone e un ruolo dedicato di \"Regia "
+"Audio\" per l'elettronica live."
+msgstr ""
+"Ramificazioni est une série de concerts <strong>indépendante</strong> de "
+"musique de chambre contemporaine et électroacoustique : quatre concerts par "
+"saison, chacun avec son propre compositeur à l'affiche et un rôle dédié de «"
+" Regia Audio » pour l'électronique en direct."
+
+msgid ""
+"La stagione 2025/26 è stata ospitata dal Conservatorio della Svizzera "
+"Italiana, che ne ha messo a disposizione la sede — un rapporto di "
+"ospitalità, non un'affiliazione organizzativa: Ramificazioni resta un "
+"progetto autonomo."
+msgstr ""
+"La saison 2025/26 a été accueillie par le Conservatorio della Svizzera "
+"Italiana, qui a mis à disposition le lieu — une relation d'accueil, pas une "
+"affiliation organisationnelle : Ramificazioni reste un projet autonome."
+
+msgid "Direzione artistica"
+msgstr "Direction artistique"
+
+msgid "Sede dei concerti"
+msgstr "Lieu des concerts"
+
+msgid ""
+"La sede è indicata nella scheda di ogni singolo concerto (può cambiare da "
+"un'edizione all'altra)."
+msgstr ""
+"Le lieu est indiqué sur la fiche de chaque concert (il peut changer d'une "
+"édition à l'autre)."
+
+msgid "Newsletter"
+msgstr "Newsletter"
+
+msgid ""
+"Iscrizione avvisi nuova stagione/concerto — da collegare a un servizio di "
+"invio email."
+msgstr ""
+"Inscription aux annonces de saison/concert — à connecter à un service "
+"d'envoi d'e-mails."
+
+msgid "Interpreti, compositori e regia audio della stagione."
+msgstr "Interprètes, compositeurs et régie audio de la saison."
+
+msgid "Concerto"
+msgstr "Concert"
+
+msgid "Le schede dei contributor verranno pubblicate a breve."
+msgstr "Les fiches des contributeurs seront publiées prochainement."
+
+msgid "Ramificazioni"
+msgstr "Ramificazioni"
+
+msgid "edizione"
+msgstr "édition"
+
+msgid "ore"
+msgstr "à"
+
+msgid "Programma"
+msgstr "Programme"
+
+msgid "Interpreti"
+msgstr "Interprètes"
+
+msgid "Regia Audio"
+msgstr "Régie audio"
+
+msgid "Musiche di"
+msgstr "Musique de"
+
+msgid "Nota di programma"
+msgstr "Note de programme"
+
+msgid "Come arrivare"
+msgstr "Comment s'y rendre"
+
+msgid "Apri la mappa"
+msgstr "Ouvrir la carte"
+
+msgid "Foto"
+msgstr "Photos"
+
+msgid "Prenota il tuo posto"
+msgstr "Réservez votre place"
+
+msgid "Link di prenotazione non ancora disponibile."
+msgstr "Lien de réservation pas encore disponible."
+
+msgid "Stagione"
+msgstr "Saison"
+
+msgid "Edizione"
+msgstr "Édition"
+
+msgid "Nessun concerto futuro pubblicato al momento."
+msgstr "Aucun concert à venir publié pour le moment."
+
+msgid "Stagioni passate"
+msgstr "Saisons précédentes"
+
+msgid "L'archivio si popolerà automaticamente a fine stagione."
+msgstr "Les archives se rempliront automatiquement en fin de saison."
+
+msgid "Prossimo concerto"
+msgstr "Prochain concert"
+
+msgid "Vai alla scheda concerto"
+msgstr "Voir la fiche du concert"
+
+msgid "Nessun concerto pubblicato al momento — torna presto."
+msgstr "Aucun concert publié pour le moment — revenez bientôt."
+
+msgid "Cos'è Ramificazioni"
+msgstr "Qu'est-ce que Ramificazioni"
+
+msgid ""
+"Ramificazioni è una rassegna indipendente di musica da camera contemporanea "
+"ed elettroacustica: quattro concerti a stagione, ognuno con un proprio "
+"compositore in cartellone e un ruolo dedicato di \"Regia Audio\" per "
+"l'elettronica live. La stagione 2025/26 è ospitata dal Conservatorio della "
+"Svizzera Italiana."
+msgstr ""
+"Ramificazioni est une série de concerts indépendante de musique de chambre "
+"contemporaine et électroacoustique : quatre concerts par saison, chacun avec"
+" son propre compositeur à l'affiche et un rôle dédié de « Regia Audio » pour"
+" l'électronique en direct. La saison 2025/26 est accueillie par le "
+"Conservatorio della Svizzera Italiana."
+
+msgid "Leggi di più su chi siamo"
+msgstr "En savoir plus sur nous"
+
+msgid "La stagione verrà pubblicata a breve."
+msgstr "La saison sera publiée prochainement."

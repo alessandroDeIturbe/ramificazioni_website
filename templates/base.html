@@ -1,0 +1,71 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Ramificazioni{% endblock %}</title>
+<meta name="description" content="{% block description %}{% trans 'Ramificazioni è una rassegna indipendente di musica da camera contemporanea ed elettroacustica.' %}{% endblock %}">
+{% block og %}{% endblock %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="{% url 'concerti:home' %}">
+    <img src="{% static 'img/ramificazioni_logo.svg' %}" alt="Ramificazioni">
+    <span>Ramificazioni</span>
+  </a>
+  <nav class="site-nav" aria-label="{% trans 'Navigazione principale' %}">
+    <a href="{% url 'concerti:home' %}">{% trans "Home" %}</a>
+    <a href="{% url 'concerti:about' %}">{% trans "About" %}</a>
+    <a href="{% url 'concerti:events_list' %}">{% trans "Events" %}</a>
+    <a href="{% url 'concerti:contacts' %}">{% trans "Contacts" %}</a>
+    <a href="{% url 'concerti:contributors' %}">{% trans "Contributors" %}</a>
+  </nav>
+  <form action="{% url 'set_language' %}" method="post" class="lang-switch">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.path }}">
+    {% get_current_language as CURRENT_LANGUAGE %}
+    {% get_available_languages as AVAILABLE_LANGUAGES %}
+    {% for lang_code, lang_name in AVAILABLE_LANGUAGES %}
+      <button type="submit" name="language" value="{{ lang_code }}"{% if lang_code == CURRENT_LANGUAGE %} class="active"{% endif %}>{{ lang_code|upper }}</button>
+    {% endfor %}
+  </form>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="col">
+    <strong>Ramificazioni</strong>
+    <span>{% trans "Rassegna indipendente di musica da camera contemporanea/elettroacustica" %}</span>
+  </div>
+  <div class="col">
+    <a href="https://www.instagram.com/ramificazioni.festival" target="_blank" rel="noopener">Instagram</a>
+    <a href="mailto:info@ramificazioni.ch">info@ramificazioni.ch</a>
+  </div>
+  <div class="col">
+    <a href="{% url 'concerti:contacts' %}">{% trans "Privacy" %}</a>
+    <a href="{% url 'concerti:contacts' %}">{% trans "Impressum" %}</a>
+  </div>
+  {% if sostenitori_footer %}
+  <div class="col supporters">
+    {% for s in sostenitori_footer %}
+      {% if s.url %}<a href="{{ s.url }}" target="_blank" rel="noopener">{% endif %}
+      <img src="{{ s.logo.url }}" alt="{{ s.nome }}" style="height:2rem;width:auto;">
+      {% if s.url %}</a>{% endif %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="supporters-note">{% trans "Loghi sostenitori/partner — da confermare" %}</p>
+  {% endif %}
+</footer>
+
+</body>
+</html>

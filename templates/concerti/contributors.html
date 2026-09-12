@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Contributors — Ramificazioni{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>Contributors</h1>
+  <p>{% trans "Interpreti, compositori e regia audio della stagione." %}</p>
+</section>
+
+<section>
+  <div class="people-grid">
+    {% for p in persone %}
+    <div class="person-card">
+      {% if p.ritratto %}<img class="portrait" src="{{ p.ritratto.url }}" alt="{{ p.nome }}">{% else %}<div class="portrait">foto</div>{% endif %}
+      <h3>{{ p.nome }}</h3>
+      <p class="role">{{ p.get_ruolo_display }}{% if p.strumento %} — {{ p.strumento }}{% endif %}</p>
+      {% if p.bio %}<p>{{ p.bio }}</p>{% endif %}
+      {% for c in p.concerti.all %}
+        <p><a href="{% url 'concerti:event_detail' c.slug %}">{% trans "Concerto" %}: {{ c.data|date:"d M Y" }} →</a></p>
+      {% endfor %}
+    </div>
+    {% empty %}
+    <p>{% trans "Le schede dei contributor verranno pubblicate a breve." %}</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ concerto.data|date:"d F Y" }} — Ramificazioni{% endblock %}
+{% block description %}{% trans "Ramificazioni" %}, {% trans "edizione" %} {{ concerto.numero_edizione }} — {{ concerto.data|date:"d F Y" }}{% endblock %}
+{% block og %}
+<meta property="og:title" content="Ramificazioni — {{ concerto.data|date:'d F Y' }}">
+<meta property="og:type" content="website">
+{% endblock %}
+{% block content %}
+
+<header class="poster-header" style="background: {{ concerto.gradiente_css }}; --credit-cols: 3;">
+  <h1 class="wordmark">Ramificazioni</h1>
+  <p class="edition-number" style="color: {{ concerto.colore_accento }};">{{ concerto.stagione }}</p>
+  <div>
+    <p class="info-line">{{ concerto.data|date:"d F Y" }}</p>
+    {% if concerto.ora %}<p class="info-line">{% trans "ore" %} {{ concerto.ora|time:"H:i" }}</p>{% endif %}
+    {% if concerto.sede %}<p class="info-line">{{ concerto.sede.nome }}</p>{% endif %}
+  </div>
+
+  {% if concerto.brani.all %}
+  <div style="margin-top:1rem;">
+    <span class="credit-label">{% trans "Programma" %}</span>
+    <ul style="margin:0.3rem 0 0; padding-left:1.1rem;">
+      {% for b in concerto.brani.all %}
+      <li class="info-line" style="font-weight:400;">
+        {{ b.compositore }} — {{ b.titolo }}
+        {% if b.prima_esecuzione_tipo %}<em style="opacity:0.7;">({{ b.get_prima_esecuzione_tipo_display }})</em>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="poster-credits">
+    {% if concerto.interpreti %}
+    <div class="credit-col">
+      <span class="credit-label">{% trans "Interpreti" %}</span>
+      {% for p in concerto.interpreti %}<span class="credit-name">{{ p.persona.nome }}{% if p.strumento %} — {{ p.strumento }}{% endif %}</span>{% endfor %}
+    </div>
+    {% endif %}
+    {% if concerto.regia_audio %}
+    <div class="credit-col">
+      <span class="credit-label">{% trans "Regia Audio" %}</span>
+      {% for p in concerto.regia_audio %}<span class="credit-name">{{ p.persona.nome }}</span>{% endfor %}
+    </div>
+    {% endif %}
+    {% if concerto.compositori %}
+    <div class="credit-col">
+      <span class="credit-label">{% trans "Musiche di" %}</span>
+      {% for p in concerto.compositori %}<span class="credit-name">{{ p.persona.nome }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+{% if concerto.nota_programma %}
+<section>
+  <h2>{% trans "Nota di programma" %}</h2>
+  <p>{{ concerto.nota_programma|linebreaks }}</p>
+</section>
+{% endif %}
+
+{% if concerto.sede %}
+<section>
+  <h2>{% trans "Come arrivare" %}</h2>
+  <p>{{ concerto.sede.nome }}{% if concerto.sede.indirizzo %} — {{ concerto.sede.indirizzo }}{% endif %}</p>
+  {% if concerto.sede.mappa_url %}<p><a href="{{ concerto.sede.mappa_url }}" target="_blank" rel="noopener">{% trans "Apri la mappa" %} →</a></p>{% endif %}
+</section>
+{% endif %}
+
+{% if concerto.foto.all %}
+<section>
+  <h2>{% trans "Foto" %}</h2>
+  <div class="event-gallery" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;">
+    {% for f in concerto.foto.all %}
+    <img src="{{ f.immagine.url }}" alt="{{ f.didascalia }}" style="width:100%; aspect-ratio:3/2; object-fit:cover;">
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if not concerto.is_passato %}
+<section>
+  {% if concerto.link_prenotazione %}
+  <a class="cta" href="{{ concerto.link_prenotazione }}" target="_blank" rel="noopener">{% trans "Prenota il tuo posto" %} →</a>
+  {% else %}
+  <p class="supporters-note">{% trans "Link di prenotazione non ancora disponibile." %}</p>
+  {% endif %}
+</section>
+{% endif %}
+
+{% endblock %}

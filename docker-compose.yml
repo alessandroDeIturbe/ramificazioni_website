@@ -1,0 +1,40 @@
+# Sviluppo locale: runserver con reload, codice montato come volume.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ramificazioni
+      POSTGRES_USER: ramificazioni
+      POSTGRES_PASSWORD: ramificazioni
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ramificazioni"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  web:
+    build: .
+    # In dev niente collectstatic (serve solo in prod con WhiteNoise/gunicorn):
+    # runserver con DEBUG=True serve già i file statici da solo.
+    entrypoint: []
+    command: sh -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DB_HOST: db
+      DB_NAME: ramificazioni
+      DB_USER: ramificazioni
+      DB_PASSWORD: ramificazioni
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

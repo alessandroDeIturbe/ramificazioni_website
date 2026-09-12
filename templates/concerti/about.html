@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}About — Ramificazioni{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>About</h1>
+  <p>{% blocktrans %}Ramificazioni è una rassegna <strong>indipendente</strong> di musica da camera contemporanea ed elettroacustica: quattro concerti a stagione, ognuno con un proprio compositore in cartellone e un ruolo dedicato di "Regia Audio" per l'elettronica live.{% endblocktrans %}</p>
+  <p>{% blocktrans %}La stagione 2025/26 è stata ospitata dal Conservatorio della Svizzera Italiana, che ne ha messo a disposizione la sede — un rapporto di ospitalità, non un'affiliazione organizzativa: Ramificazioni resta un progetto autonomo.{% endblocktrans %}</p>
+</section>
+
+{% if direzione %}
+<section>
+  <h2>{% trans "Direzione artistica" %}</h2>
+  <div class="people-grid">
+    {% for p in direzione %}
+    <div class="person-card">
+      {% if p.ritratto %}<img class="portrait" src="{{ p.ritratto.url }}" alt="{{ p.nome }}">{% else %}<div class="portrait">foto</div>{% endif %}
+      <h3>{{ p.nome }}</h3>
+      <p class="role">{{ p.get_ruolo_display }}</p>
+      {% if p.bio %}<p>{{ p.bio }}</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

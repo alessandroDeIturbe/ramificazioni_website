@@ -1,0 +1,143 @@
+/* RAMIFICAZIONI — stylesheet. Tokens da ramificazioni_design_system.md.
+   I gradienti-per-edizione non sono più classi fisse (ed-a..d): ogni Concerto
+   ha i propri colori nel DB e il template li applica come style inline
+   (vedi concerto.gradiente_css in concerti/models.py). */
+
+:root {
+  --ink: #171512;
+  --paper-line: rgba(23, 21, 18, 0.16);
+  --neutral-bg: #faf8f4;
+
+  --font-display: 'Playfair Display', 'Times New Roman', serif;
+  --font-body: 'Poppins', sans-serif;
+
+  --title-size: clamp(2.2rem, 7vw, 5.5rem);
+  --h2-size: clamp(1.5rem, 4vw, 2.6rem);
+  --body-size: clamp(0.85rem, 1.3vw, 1rem);
+  --small-size: clamp(0.7rem, 1vw, 0.85rem);
+
+  --page-padding: clamp(1.25rem, 5vw, 4rem);
+  --section-gap: clamp(2rem, 6vw, 5rem);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--neutral-bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+.site-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1rem var(--page-padding);
+  border-bottom: 1px solid var(--paper-line); flex-wrap: wrap;
+}
+.site-header .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.site-header .brand img { height: 2.2rem; width: auto; }
+.site-header .brand span {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; font-size: 1rem;
+}
+.site-nav { display: flex; gap: clamp(0.75rem, 2vw, 1.5rem); flex-wrap: wrap; }
+.site-nav a { text-decoration: none; font-weight: 500; font-size: var(--small-size); opacity: 0.82; }
+.site-nav a:hover { opacity: 1; }
+
+.lang-switch { display: flex; gap: 0.3rem; font-size: var(--small-size); margin: 0; }
+.lang-switch button {
+  background: none; border: none; cursor: pointer; padding: 0.2rem 0.3rem;
+  font-family: var(--font-body); font-size: var(--small-size); opacity: 0.45;
+}
+.lang-switch button.active { opacity: 1; font-weight: 600; }
+.lang-switch button:hover { opacity: 1; }
+
+main { display: block; }
+
+.poster-header {
+  padding: clamp(1.5rem, 5vw, 4rem) var(--page-padding);
+  display: flex; flex-direction: column; gap: clamp(0.5rem, 2vw, 1.5rem);
+}
+.wordmark {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.01em; color: var(--ink); line-height: 0.95; margin: 0;
+  font-size: var(--title-size);
+}
+.edition-number {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(2rem, 6.5vw, 5rem); line-height: 0.9; margin: 0; align-self: flex-end;
+}
+.info-line { font-family: var(--font-body); font-weight: 600; color: var(--ink); line-height: 1.4; margin: 0.15rem 0; }
+.info-line.meta { font-weight: 400; opacity: 0.55; }
+
+.poster-credits {
+  display: grid; grid-template-columns: repeat(var(--credit-cols, 4), 1fr);
+  gap: clamp(1rem, 3vw, 2rem); border-top: 1px solid var(--paper-line);
+  padding-top: clamp(1rem, 3vw, 2rem); text-align: center;
+}
+.credit-col { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.credit-label { font-weight: 700; font-size: var(--small-size); display: block; }
+.credit-name { font-weight: 400; opacity: 0.82; display: block; }
+@media (max-width: 640px) { .poster-credits { grid-template-columns: repeat(2, 1fr); } }
+
+.season-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem); padding: 0 var(--page-padding) var(--section-gap);
+}
+.season-card {
+  text-decoration: none; color: var(--ink);
+  border-radius: 4px; padding: 1.5rem; min-height: 200px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+.season-card:hover { transform: translateY(-2px); }
+.season-card h3 { font-family: var(--font-display); margin: 0 0 0.5rem; font-size: var(--h2-size); }
+.season-card .date { font-weight: 600; font-size: var(--small-size); }
+.season-card .composer { font-size: var(--small-size); opacity: 0.7; margin-top: 0.75rem; }
+
+.hero-next { padding: var(--page-padding); display: flex; flex-direction: column; gap: 0.75rem; }
+.hero-next .eyebrow { font-size: var(--small-size); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.6; }
+.cta {
+  display: inline-block; align-self: flex-start; margin-top: 0.5rem;
+  padding: 0.6rem 1.2rem; border: 1px solid var(--ink); border-radius: 2px;
+  text-decoration: none; font-weight: 600; font-size: var(--small-size);
+}
+.cta:hover { background: var(--ink); color: var(--neutral-bg); }
+
+section { padding: var(--section-gap) var(--page-padding); }
+section.intro { padding-top: 0; max-width: 60ch; }
+h2 { font-family: var(--font-display); font-size: var(--h2-size); }
+
+.people-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+.person-card { text-align: left; }
+.person-card .portrait {
+  aspect-ratio: 1; width: 100%; object-fit: cover; background: var(--paper-line); border-radius: 4px; margin-bottom: 0.6rem;
+  display: flex; align-items: center; justify-content: center; font-size: var(--small-size); opacity: 0.5;
+}
+.person-card h3 { font-family: var(--font-body); font-weight: 600; font-size: var(--body-size); margin: 0 0 0.2rem; }
+.person-card .role { font-size: var(--small-size); opacity: 0.6; margin: 0 0 0.4rem; }
+.person-card p { font-size: var(--small-size); opacity: 0.82; margin: 0 0 0.3rem; }
+
+.site-footer {
+  border-top: 1px solid var(--paper-line);
+  padding: var(--section-gap) var(--page-padding) 2rem;
+  display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between;
+  font-size: var(--small-size);
+}
+.site-footer .col { display: flex; flex-direction: column; gap: 0.5rem; }
+.site-footer .col.supporters { flex-direction: row; align-items: center; flex-wrap: wrap; }
+.site-footer a { text-decoration: none; opacity: 0.7; }
+.site-footer a:hover { opacity: 1; }
+.supporters-note { opacity: 0.55; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+}

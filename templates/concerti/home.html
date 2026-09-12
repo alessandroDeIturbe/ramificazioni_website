@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+{% if prossimo %}
+<section class="hero-next" style="background: {{ prossimo.gradiente_css }};">
+  <p class="eyebrow">{% trans "Prossimo concerto" %}</p>
+  <h1 class="wordmark" style="font-size: clamp(1.8rem, 5vw, 3rem);">{{ prossimo.data|date:"d F Y" }}</h1>
+  {% if prossimo.sede %}<p class="info-line">{{ prossimo.sede.nome }}{% if prossimo.ora %} — {% trans "ore" %} {{ prossimo.ora|time:"H:i" }}{% endif %}</p>{% endif %}
+  {% if prossimo.compositori %}
+  <p class="info-line meta">{% trans "Musiche di" %} {% for p in prossimo.compositori %}{{ p.persona.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+  {% endif %}
+  <a class="cta" href="{% url 'concerti:event_detail' prossimo.slug %}">{% trans "Vai alla scheda concerto" %} →</a>
+</section>
+{% else %}
+<section class="hero-next">
+  <p class="eyebrow">{% trans "Prossimo concerto" %}</p>
+  <p>{% trans "Nessun concerto pubblicato al momento — torna presto." %}</p>
+</section>
+{% endif %}
+
+<section class="intro">
+  <h2>{% trans "Cos'è Ramificazioni" %}</h2>
+  <p>{% blocktrans %}Ramificazioni è una rassegna indipendente di musica da camera contemporanea ed elettroacustica: quattro concerti a stagione, ognuno con un proprio compositore in cartellone e un ruolo dedicato di "Regia Audio" per l'elettronica live. La stagione 2025/26 è ospitata dal Conservatorio della Svizzera Italiana.{% endblocktrans %}</p>
+  <p><a href="{% url 'concerti:about' %}">{% trans "Leggi di più su chi siamo" %} →</a></p>
+</section>
+
+<section>
+  <h2>{% trans "Stagione" %}</h2>
+</section>
+<div class="season-grid">
+  {% for c in stagione %}
+  <a class="season-card" style="background: {{ c.gradiente_css }};" href="{% url 'concerti:event_detail' c.slug %}">
+    <div>
+      <p class="date">{{ c.data|date:"d F Y" }}</p>
+      <h3>{% trans "Edizione" %} {{ c.numero_edizione }}</h3>
+    </div>
+    {% if c.compositori %}<p class="composer">{% trans "Musiche di" %} {% for p in c.compositori %}{{ p.persona.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+  </a>
+  {% empty %}
+  <p>{% trans "La stagione verrà pubblicata a breve." %}</p>
+  {% endfor %}
+</div>
+
+{% endblock %}
