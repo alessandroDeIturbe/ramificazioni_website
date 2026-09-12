@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n i18n_extras %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -28,7 +28,7 @@
   </nav>
   <form action="{% url 'set_language' %}" method="post" class="lang-switch">
     {% csrf_token %}
-    <input name="next" type="hidden" value="{{ request.path }}">
+    <input name="next" type="hidden" value="{{ request.path|strip_lang_prefix }}">
     {% get_current_language as CURRENT_LANGUAGE %}
     {% get_available_languages as AVAILABLE_LANGUAGES %}
     {% for lang_code, lang_name in AVAILABLE_LANGUAGES %}
