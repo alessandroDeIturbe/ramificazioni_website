@@ -26,7 +26,7 @@
 </section>
 
 <section>
-  <h2>{% trans "Stagione" %}</h2>
+  <h2>{% trans "Stagione" %}{% if stagione_corrente %} {{ stagione_corrente }}{% endif %}</h2>
 </section>
 <div class="season-grid">
   {% for c in stagione %}
@@ -41,5 +41,6 @@
   <p>{% trans "La stagione verrà pubblicata a breve." %}</p>
   {% endfor %}
 </div>
+<p><a href="{% url 'concerti:events_list' %}">{% trans "Vedi le edizioni passate" %} →</a></p>
 
 {% endblock %}

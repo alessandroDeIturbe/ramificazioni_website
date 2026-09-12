@@ -8,8 +8,17 @@ from .models import Concerto, Persona, Sostenitore
 
 def home(request):
     prossimo = Concerto.objects.futuri().select_related("sede").first()
-    stagione = Concerto.objects.pubblicati().select_related("sede").order_by("data")
-    return render(request, "concerti/home.html", {"prossimo": prossimo, "stagione": stagione})
+    riferimento = prossimo or Concerto.objects.pubblicati().order_by("-data").first()
+    stagione_corrente = riferimento.stagione if riferimento else None
+    stagione = (
+        Concerto.objects.pubblicati().filter(stagione=stagione_corrente)
+        .select_related("sede").order_by("data")
+        if stagione_corrente else Concerto.objects.none()
+    )
+    return render(
+        request, "concerti/home.html",
+        {"prossimo": prossimo, "stagione": stagione, "stagione_corrente": stagione_corrente},
+    )
 
 
 def events_list(request):
