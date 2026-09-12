@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Sostenitori" %} — Ramificazioni{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>{% trans "Sostenitori" %}</h1>
+  <p>{% trans "Le realtà che sostengono la rassegna." %}</p>
+</section>
+
+<section>
+  <div class="people-grid">
+    {% for s in sostenitori %}
+    <div class="person-card">
+      {% if s.url %}<a href="{{ s.url }}" target="_blank" rel="noopener">{% endif %}
+      <img class="portrait" src="{{ s.logo.url }}" alt="{{ s.nome }}" style="object-fit:contain; background:#fff;">
+      {% if s.url %}</a>{% endif %}
+      <h3>{{ s.nome }}</h3>
+    </div>
+    {% empty %}
+    <p>{% trans "Nessun sostenitore pubblicato al momento." %}</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <h2>{% trans "Diventa sponsor" %}</h2>
+  <p>{% trans "Compila il form per proporti come sponsor della prossima stagione." %}</p>
+  <form method="post" style="max-width:40ch; display:flex; flex-direction:column; gap:0.75rem;">
+    {% csrf_token %}
+    <div style="position:absolute; left:-9999px;" aria-hidden="true">{{ form.nome_azienda_hp }}</div>
+    {% for field in form.visible_fields %}
+    <div>
+      <label for="{{ field.id_for_label }}" style="display:block; font-weight:600; font-size:var(--small-size); margin-bottom:0.2rem;">{{ field.label }}</label>
+      {{ field }}
+      {% for error in field.errors %}<p style="color:#b23; font-size:var(--small-size); margin:0.2rem 0 0;">{{ error }}</p>{% endfor %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="cta" style="align-self:flex-start;">{% trans "Invia" %}</button>
+  </form>
+</section>
+
+{% endblock %}

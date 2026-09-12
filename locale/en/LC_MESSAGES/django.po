@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 18:02+0200\n"
+"POT-Creation-Date: 2026-09-12 20:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: concerti/forms.py:11
+msgid "Nome / organizzazione"
+msgstr "Name / organization"
+
+#: concerti/forms.py:12
+msgid "Email"
+msgstr "Email"
+
+#: concerti/forms.py:13
+msgid "Messaggio"
+msgstr "Message"
+
+#: concerti/views.py:50
+msgid "Grazie, ti risponderemo al più presto."
+msgstr "Thank you, we'll get back to you soon."
+
+#: templates/base.html:8
 msgid ""
 "Ramificazioni è una rassegna indipendente di musica da camera contemporanea "
 "ed elettroacustica."
@@ -25,42 +42,60 @@ msgstr ""
 "Ramificazioni is an independent concert series of contemporary chamber and "
 "electroacoustic music."
 
+#: templates/base.html:22
 msgid "Navigazione principale"
 msgstr "Main navigation"
 
+#: templates/base.html:23
 msgid "Home"
 msgstr "Home"
 
-msgid "About"
+#: templates/base.html:24 templates/concerti/about.html:3
+#: templates/concerti/about.html:7
+msgid "Chi siamo"
 msgstr "About"
 
-msgid "Events"
+#: templates/base.html:25 templates/concerti/events_list.html:3
+msgid "Eventi"
 msgstr "Events"
 
-msgid "Contacts"
+#: templates/base.html:26 templates/concerti/contacts.html:3
+#: templates/concerti/contacts.html:7
+msgid "Contatti"
 msgstr "Contacts"
 
-msgid "Contributors"
+#: templates/base.html:27 templates/concerti/sostenitori.html:3
+#: templates/concerti/sostenitori.html:7
+msgid "Sostenitori"
+msgstr "Supporters"
+
+#: templates/base.html:28 templates/concerti/contributors.html:3
+#: templates/concerti/contributors.html:7
+msgid "Collaboratori"
 msgstr "Contributors"
 
-msgid ""
-"Rassegna indipendente di musica da camera contemporanea/elettroacustica"
-msgstr ""
+#: templates/base.html:53
+msgid "Rassegna indipendente di musica da camera contemporanea/elettroacustica"
+msgstr "An independent chamber and electroacoustic contemporary music series"
 "Independent concert series of contemporary chamber/electroacoustic music"
 
+#: templates/base.html:60
 msgid "Privacy"
 msgstr "Privacy"
 
+#: templates/base.html:61
 msgid "Impressum"
 msgstr "Legal notice"
 
+#: templates/base.html:72
 msgid "Loghi sostenitori/partner — da confermare"
 msgstr "Supporter/partner logos — to be confirmed"
 
+#: templates/concerti/about.html:8
 msgid ""
 "Ramificazioni è una rassegna <strong>indipendente</strong> di musica da "
-"camera contemporanea ed elettroacustica: quattro concerti a stagione, ognuno"
-" con un proprio compositore in cartellone e un ruolo dedicato di \"Regia "
+"camera contemporanea ed elettroacustica: quattro concerti a stagione, ognuno "
+"con un proprio compositore in cartellone e un ruolo dedicato di \"Regia "
 "Audio\" per l'elettronica live."
 msgstr ""
 "Ramificazioni is an <strong>independent</strong> concert series of "
@@ -68,6 +103,7 @@ msgstr ""
 "each featuring its own composer and a dedicated \"Regia Audio\" role for "
 "live electronics."
 
+#: templates/concerti/about.html:9
 msgid ""
 "La stagione 2025/26 è stata ospitata dal Conservatorio della Svizzera "
 "Italiana, che ne ha messo a disposizione la sede — un rapporto di "
@@ -78,12 +114,15 @@ msgstr ""
 "which provided the venue — a hosting arrangement, not an organizational "
 "affiliation: Ramificazioni remains an independent project."
 
+#: templates/concerti/about.html:14
 msgid "Direzione artistica"
 msgstr "Artistic direction"
 
+#: templates/concerti/contacts.html:13
 msgid "Sede dei concerti"
 msgstr "Concert venue"
 
+#: templates/concerti/contacts.html:14
 msgid ""
 "La sede è indicata nella scheda di ogni singolo concerto (può cambiare da "
 "un'edizione all'altra)."
@@ -91,9 +130,11 @@ msgstr ""
 "The venue is listed on each concert's page (it may change from one edition "
 "to the next)."
 
+#: templates/concerti/contacts.html:18
 msgid "Newsletter"
 msgstr "Newsletter"
 
+#: templates/concerti/contacts.html:19
 msgid ""
 "Iscrizione avvisi nuova stagione/concerto — da collegare a un servizio di "
 "invio email."
@@ -101,81 +142,110 @@ msgstr ""
 "Sign up for season/concert announcements — to be connected to an email "
 "sending service."
 
+#: templates/concerti/contributors.html:8
 msgid "Interpreti, compositori e regia audio della stagione."
 msgstr "Performers, composers and live-electronics direction for the season."
 
+#: templates/concerti/contributors.html:20
 msgid "Concerto"
 msgstr "Concert"
 
+#: templates/concerti/contributors.html:24
 msgid "Le schede dei contributor verranno pubblicate a breve."
 msgstr "Contributor profiles will be published soon."
 
+#: templates/concerti/event_detail.html:4
 msgid "Ramificazioni"
 msgstr "Ramificazioni"
 
+#: templates/concerti/event_detail.html:4
 msgid "edizione"
 msgstr "edition"
 
+#: templates/concerti/event_detail.html:16 templates/concerti/home.html:9
 msgid "ore"
 msgstr "at"
 
+#: templates/concerti/event_detail.html:22
 msgid "Programma"
 msgstr "Programme"
 
+#: templates/concerti/event_detail.html:37
 msgid "Interpreti"
 msgstr "Performers"
 
+#: templates/concerti/event_detail.html:43
 msgid "Regia Audio"
 msgstr "Live Electronics Direction"
 
+#: templates/concerti/event_detail.html:49
+#: templates/concerti/events_list.html:17 templates/concerti/home.html:11
+#: templates/concerti/home.html:38
 msgid "Musiche di"
 msgstr "Music by"
 
+#: templates/concerti/event_detail.html:58
 msgid "Nota di programma"
 msgstr "Programme note"
 
+#: templates/concerti/event_detail.html:65
 msgid "Come arrivare"
 msgstr "How to get there"
 
+#: templates/concerti/event_detail.html:67
 msgid "Apri la mappa"
 msgstr "Open the map"
 
+#: templates/concerti/event_detail.html:73
 msgid "Foto"
 msgstr "Photos"
 
+#: templates/concerti/event_detail.html:85
 msgid "Prenota il tuo posto"
 msgstr "Book your seat"
 
+#: templates/concerti/event_detail.html:87
 msgid "Link di prenotazione non ancora disponibile."
 msgstr "Booking link not yet available."
 
+#: templates/concerti/events_list.html:7 templates/concerti/home.html:29
 msgid "Stagione"
 msgstr "Season"
 
+#: templates/concerti/events_list.html:15
+#: templates/concerti/events_list.html:32 templates/concerti/home.html:36
 msgid "Edizione"
 msgstr "Edition"
 
+#: templates/concerti/events_list.html:20
 msgid "Nessun concerto futuro pubblicato al momento."
 msgstr "No upcoming concert published at the moment."
 
+#: templates/concerti/events_list.html:25
 msgid "Stagioni passate"
 msgstr "Past seasons"
 
+#: templates/concerti/events_list.html:36
 msgid "L'archivio si popolerà automaticamente a fine stagione."
 msgstr "The archive will populate automatically at the end of the season."
 
+#: templates/concerti/home.html:7 templates/concerti/home.html:17
 msgid "Prossimo concerto"
 msgstr "Next concert"
 
+#: templates/concerti/home.html:13
 msgid "Vai alla scheda concerto"
 msgstr "Go to the concert page"
 
+#: templates/concerti/home.html:18
 msgid "Nessun concerto pubblicato al momento — torna presto."
 msgstr "No concert published at the moment — check back soon."
 
+#: templates/concerti/home.html:23
 msgid "Cos'è Ramificazioni"
 msgstr "What is Ramificazioni"
 
+#: templates/concerti/home.html:24
 msgid ""
 "Ramificazioni è una rassegna indipendente di musica da camera contemporanea "
 "ed elettroacustica: quattro concerti a stagione, ognuno con un proprio "
@@ -188,8 +258,38 @@ msgstr ""
 "composer and a dedicated \"Regia Audio\" role for live electronics. The "
 "2025/26 season is hosted by the Conservatorio della Svizzera Italiana."
 
+#: templates/concerti/home.html:25
 msgid "Leggi di più su chi siamo"
 msgstr "Read more about us"
 
+#: templates/concerti/home.html:41
 msgid "La stagione verrà pubblicata a breve."
 msgstr "The season will be published soon."
+
+#: templates/concerti/sostenitori.html:8
+msgid "Le realtà che sostengono la rassegna."
+msgstr "The organizations that support the series."
+
+#: templates/concerti/sostenitori.html:21
+#, fuzzy
+#| msgid "Nessun concerto futuro pubblicato al momento."
+msgid "Nessun sostenitore pubblicato al momento."
+msgstr "No upcoming concert published at the moment."
+
+#: templates/concerti/sostenitori.html:27
+msgid "Diventa sponsor"
+msgstr "Become a sponsor"
+
+#: templates/concerti/sostenitori.html:28
+msgid "Compila il form per proporti come sponsor della prossima stagione."
+msgstr "Fill out the form to propose yourself as a sponsor for next season."
+
+#: templates/concerti/sostenitori.html:39
+msgid "Invia"
+msgstr "Send"
+
+#~ msgid "About"
+#~ msgstr "About"
+
+#~ msgid "Contributors"
+#~ msgstr "Contributors"

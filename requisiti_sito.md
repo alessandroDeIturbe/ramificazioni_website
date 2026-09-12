@@ -59,10 +59,11 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
       template marcate `{% trans %}`/`{% blocktrans %}`, tradotte a mano in
       `locale/{de,fr,en}/LC_MESSAGES/django.po` e compilate in `.mo`, committati nel
       repo — non serve `makemessages`/`compilemessages` al deploy finché il testo non
-      cambia). Nomi propri, titoli dei brani e contenuti inseriti da admin (note di
-      programma, bio) restano in una sola lingua per ora: tradurre anche i contenuti
-      del DB richiederebbe un pacchetto come django-modeltranslation — non aggiunto,
-      valutare se/quando servirà davvero.
+      cambia). Contenuti DB traducibili (nota di programma, bio) via campi ombra per
+      lingua (`_en`/`_de`/`_fr`) con fallback automatico all'italiano se non ancora
+      compilati — niente pacchetto esterno, solo 2 campi coinvolti. Nomi propri e
+      titoli dei brani restano volutamente in una sola lingua (convenzione musicale
+      standard, non un limite tecnico).
 - [x] Switcher lingua persistente tra le pagine — form funzionante (`set_language`)
       in ogni pagina, cambia lingua mantenendo la pagina corrente
 - [x] URL localizzati per lingua (`/it/...`, `/de/...`, `/fr/...`, `/en/...` via
@@ -89,7 +90,10 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
 
 ## Sostenitori/Partner
 
-- [ ] Sezione loghi sostenitori/partner (sede ospitante, enti finanziatori) — solo nota placeholder nel footer
+- [x] Sezione loghi sostenitori/partner — pagina dedicata "Sostenitori" in header (oltre
+      alle miniature già presenti nel footer), con loghi dei sostenitori attivi
+- [x] Form per proporsi come nuovo sponsor (nome/email/messaggio → email all'admin,
+      honeypot anti-spam) — nella stessa pagina Sostenitori
 - [ ] Eventuale nota di ringraziamento/crediti istituzionali
 
 ## SEO e performance
@@ -126,5 +130,6 @@ Il sito è ora un'app Django (Postgres + admin) — non più HTML statico. La da
       migrazione o azione speciale richiesta.
 - [x] Possibilità di caricare foto galleria post-concerto autonomamente (`FotoConcerto`
       con `ImageField`, inline nella pagina del concerto)
-- [ ] Gestione multilingua dei contenuti editoriali dal medesimo pannello — non
-      implementata (vedi nota in "Multilingua": i contenuti DB restano monolingua)
+- [x] Gestione multilingua dei contenuti editoriali dal medesimo pannello — i campi
+      `_en`/`_de`/`_fr` di nota di programma e bio sono editabili nella stessa scheda
+      admin del contenuto italiano (vedi "Multilingua")

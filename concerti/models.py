@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
+from django.utils.translation import get_language
 
 
 class Sede(models.Model):
@@ -60,6 +61,9 @@ class Concerto(models.Model):
         "nota di programma", blank=True,
         help_text="Testo introduttivo sul concerto/compositore.",
     )
+    nota_programma_en = models.TextField("nota di programma (EN)", blank=True, default="")
+    nota_programma_de = models.TextField("nota di programma (DE)", blank=True, default="")
+    nota_programma_fr = models.TextField("nota di programma (FR)", blank=True, default="")
     link_prenotazione = models.URLField("link prenotazione/biglietteria", blank=True)
     pubblicato = models.BooleanField(
         default=False, help_text="Se disattivo, il concerto non è visibile sul sito pubblico."
@@ -102,6 +106,12 @@ class Concerto(models.Model):
     @property
     def is_passato(self):
         return self.data < timezone.localdate()
+
+    @property
+    def nota_programma_localizzata(self):
+        lang = get_language()
+        valore = getattr(self, f"nota_programma_{lang}", "") if lang != "it" else ""
+        return valore or self.nota_programma
 
     @property
     def regia_audio(self):
@@ -157,6 +167,9 @@ class Persona(models.Model):
     ruolo = models.CharField(max_length=20, choices=RUOLO_CHOICES)
     strumento = models.CharField(max_length=120, blank=True)
     bio = models.TextField(blank=True)
+    bio_en = models.TextField("bio (EN)", blank=True, default="")
+    bio_de = models.TextField("bio (DE)", blank=True, default="")
+    bio_fr = models.TextField("bio (FR)", blank=True, default="")
     ritratto = models.ImageField(upload_to="ritratti/", blank=True, null=True)
 
     class Meta:
@@ -166,6 +179,12 @@ class Persona(models.Model):
 
     def __str__(self):
         return f"{self.nome} ({self.get_ruolo_display()})"
+
+    @property
+    def bio_localizzata(self):
+        lang = get_language()
+        valore = getattr(self, f"bio_{lang}", "") if lang != "it" else ""
+        return valore or self.bio
 
 
 class Partecipazione(models.Model):

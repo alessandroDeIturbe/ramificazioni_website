@@ -124,7 +124,15 @@ h2 { font-family: var(--font-display); font-size: var(--h2-size); }
 }
 .person-card h3 { font-family: var(--font-body); font-weight: 600; font-size: var(--body-size); margin: 0 0 0.2rem; }
 .person-card .role { font-size: var(--small-size); opacity: 0.6; margin: 0 0 0.4rem; }
-.person-card p { font-size: var(--small-size); opacity: 0.82; margin: 0 0 0.3rem; }
+.person-card p { font-size: var(--small-size); opacity: 0.82; margin: 0 0 0.3rem; text-align: justify; }
+
+input[type="text"], input[type="email"], textarea {
+  width: 100%; font-family: var(--font-body); font-size: var(--body-size);
+  padding: 0.5rem 0.6rem; border: 1px solid var(--paper-line); border-radius: 2px;
+  background: #fff; color: var(--ink);
+}
+textarea { min-height: 6rem; resize: vertical; }
+.messages li { font-size: var(--small-size); font-weight: 600; }
 
 .site-footer {
   border-top: 1px solid var(--paper-line);

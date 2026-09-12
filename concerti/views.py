@@ -1,6 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 
-from .models import Concerto, Persona
+from .forms import SponsorInquiryForm
+from .models import Concerto, Persona, Sostenitore
 
 
 def home(request):
@@ -37,3 +40,16 @@ def contributors(request):
 
 def contacts(request):
     return render(request, "concerti/contacts.html")
+
+
+def sostenitori(request):
+    if request.method == "POST":
+        form = SponsorInquiryForm(request.POST)
+        if form.is_valid() and not form.cleaned_data["nome_azienda_hp"]:
+            form.invia_email()
+            messages.success(request, _("Grazie, ti risponderemo al più presto."))
+            return redirect("concerti:sostenitori")
+    else:
+        form = SponsorInquiryForm()
+    attivi = Sostenitore.objects.filter(attivo=True).order_by("ordine")
+    return render(request, "concerti/sostenitori.html", {"sostenitori": attivi, "form": form})

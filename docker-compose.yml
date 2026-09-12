@@ -18,6 +18,10 @@ services:
 
   web:
     build: .
+    # root solo in dev: il bind-mount .:/app sovrascrive il chown fatto nel
+    # Dockerfile, appuser non potrebbe scrivere in media/ (owner = utente host).
+    # In prod (nessun bind-mount, volumi nominati) resta l'utente non-root.
+    user: root
     # In dev niente collectstatic (serve solo in prod con WhiteNoise/gunicorn):
     # runserver con DEBUG=True serve già i file statici da solo.
     entrypoint: []

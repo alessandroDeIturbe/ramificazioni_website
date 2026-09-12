@@ -109,4 +109,7 @@ STORAGES = {
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "info@ramificazioni.ch")
+SPONSOR_INQUIRY_EMAIL = os.environ.get("SPONSOR_INQUIRY_EMAIL", DEFAULT_FROM_EMAIL)
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

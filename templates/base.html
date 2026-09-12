@@ -21,10 +21,11 @@
   </a>
   <nav class="site-nav" aria-label="{% trans 'Navigazione principale' %}">
     <a href="{% url 'concerti:home' %}">{% trans "Home" %}</a>
-    <a href="{% url 'concerti:about' %}">{% trans "About" %}</a>
-    <a href="{% url 'concerti:events_list' %}">{% trans "Events" %}</a>
-    <a href="{% url 'concerti:contacts' %}">{% trans "Contacts" %}</a>
-    <a href="{% url 'concerti:contributors' %}">{% trans "Contributors" %}</a>
+    <a href="{% url 'concerti:about' %}">{% trans "Chi siamo" %}</a>
+    <a href="{% url 'concerti:events_list' %}">{% trans "Eventi" %}</a>
+    <a href="{% url 'concerti:contacts' %}">{% trans "Contatti" %}</a>
+    <a href="{% url 'concerti:sostenitori' %}">{% trans "Sostenitori" %}</a>
+    <a href="{% url 'concerti:contributors' %}">{% trans "Collaboratori" %}</a>
   </nav>
   <form action="{% url 'set_language' %}" method="post" class="lang-switch">
     {% csrf_token %}
@@ -38,6 +39,11 @@
 </header>
 
 <main>
+{% if messages %}
+<ul class="messages" style="list-style:none; padding:0.75rem var(--page-padding); margin:0;">
+  {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+</ul>
+{% endif %}
 {% block content %}{% endblock %}
 </main>
 

@@ -59,7 +59,10 @@ class ConcertoAdmin(admin.ModelAdmin):
                 "colore_accento",
             ]},
         ),
-        ("Contenuti", {"fields": ["nota_programma", "link_prenotazione"]}),
+        ("Contenuti", {"fields": [
+            "nota_programma", "nota_programma_en", "nota_programma_de", "nota_programma_fr",
+            "link_prenotazione",
+        ]}),
     ]
 
 
@@ -68,6 +71,10 @@ class PersonaAdmin(admin.ModelAdmin):
     list_display = ["nome", "ruolo", "strumento"]
     list_filter = ["ruolo"]
     search_fields = ["nome"]
+    fieldsets = [
+        (None, {"fields": ["nome", "ruolo", "strumento", "ritratto"]}),
+        ("Bio", {"fields": ["bio", "bio_en", "bio_de", "bio_fr"]}),
+    ]
 
 
 @admin.register(Sede)
