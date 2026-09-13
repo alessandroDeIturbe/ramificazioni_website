@@ -23,6 +23,14 @@
     <a href="{% url 'concerti:home' %}">{% trans "Home" %}</a>
     <a href="{% url 'concerti:about' %}">{% trans "Chi siamo" %}</a>
     <a href="{% url 'concerti:events_list' %}">{% trans "Eventi" %}</a>
+    <div class="nav-dropdown">
+      <span tabindex="0">{% trans "Stagioni" %}</span>
+      <div class="nav-dropdown-menu">
+        {% for s in stagioni_nav %}
+          <a href="{% url 'concerti:stagione_detail' s.stagione %}">{{ s.stagione }}</a>
+        {% endfor %}
+      </div>
+    </div>
     <a href="{% url 'concerti:contacts' %}">{% trans "Contatti" %}</a>
     <a href="{% url 'concerti:sostenitori' %}">{% trans "Sostenitori" %}</a>
     <a href="{% url 'concerti:contributors' %}">{% trans "Collaboratori" %}</a>
@@ -54,7 +62,7 @@
   </div>
   <div class="col">
     <a href="https://www.instagram.com/ramificazioni.festival" target="_blank" rel="noopener">Instagram</a>
-    <a href="mailto:info@ramificazioni.ch">info@ramificazioni.ch</a>
+    <a href="mailto:info.ramificazioni@gmail.com">info.ramificazioni@gmail.com</a>
   </div>
   <div class="col">
     <a href="{% url 'concerti:contacts' %}">{% trans "Privacy" %}</a>

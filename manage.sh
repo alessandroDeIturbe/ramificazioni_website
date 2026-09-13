@@ -13,6 +13,22 @@ else
   DC="sudo docker compose"
 fi
 
+if ! $DC version >/dev/null 2>&1; then
+  echo "Errore: il demone Docker non è in esecuzione." >&2
+  case "$(uname -s)" in
+    Linux)
+      echo "Avvialo con: sudo systemctl start docker" >&2
+      ;;
+    Darwin)
+      echo "Avvialo con: open -a Docker" >&2
+      ;;
+    *)
+      echo "Avvia Docker Desktop e riprova." >&2
+      ;;
+  esac
+  exit 1
+fi
+
 usage() {
   echo "Uso: $0 {start|stop|restart|update|logs|status|shell|createsuperuser}"
   echo "  start           Avvia i container (senza rebuild)"

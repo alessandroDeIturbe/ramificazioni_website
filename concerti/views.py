@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 
@@ -8,17 +9,7 @@ from .models import Concerto, Persona, Sostenitore
 
 def home(request):
     prossimo = Concerto.objects.futuri().select_related("sede").first()
-    riferimento = prossimo or Concerto.objects.pubblicati().order_by("-data").first()
-    stagione_corrente = riferimento.stagione if riferimento else None
-    stagione = (
-        Concerto.objects.pubblicati().filter(stagione=stagione_corrente)
-        .select_related("sede").order_by("data")
-        if stagione_corrente else Concerto.objects.none()
-    )
-    return render(
-        request, "concerti/home.html",
-        {"prossimo": prossimo, "stagione": stagione, "stagione_corrente": stagione_corrente},
-    )
+    return render(request, "concerti/home.html", {"prossimo": prossimo})
 
 
 def events_list(request):
@@ -35,6 +26,13 @@ def event_detail(request, slug):
         slug=slug,
     )
     return render(request, "concerti/event_detail.html", {"concerto": concerto})
+
+
+def stagione_detail(request, stagione):
+    concerti = Concerto.objects.pubblicati().filter(stagione=stagione).select_related("sede").order_by("data")
+    if not concerti.exists():
+        raise Http404
+    return render(request, "concerti/stagione_detail.html", {"stagione": stagione, "concerti": concerti})
 
 
 def about(request):

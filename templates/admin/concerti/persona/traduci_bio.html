@@ -1,0 +1,62 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>Traduci bio mancanti (Gemini)</h1>
+
+{% if saltate %}
+<p>Saltate (nessuna bio sorgente compilata): {{ saltate|join:", " }}</p>
+{% endif %}
+
+{% if totale == 0 %}
+<p>Nessuna traduzione da fare — tutte le lingue sono già compilate.</p>
+<p><a href="{{ changelist_url }}">&larr; Torna all'elenco Persone</a></p>
+{% else %}
+<progress id="barra" value="0" max="{{ totale }}" style="width: 100%; max-width: 40rem; height: 1.2rem;"></progress>
+<p id="stato">In attesa di iniziare…</p>
+<p id="fine" style="display:none;"><a href="{{ changelist_url }}">&larr; Torna all'elenco Persone</a></p>
+
+<script id="piano-dati" type="application/json">{{ piano_json|safe }}</script>
+<script>
+(function () {
+  const piano = JSON.parse(document.getElementById("piano-dati").textContent);
+  const barra = document.getElementById("barra");
+  const stato = document.getElementById("stato");
+  const fine = document.getElementById("fine");
+
+  function csrfToken() {
+    const match = document.cookie.match(/csrftoken=([^;]+)/);
+    return match ? match[1] : "";
+  }
+
+  async function eseguiStep(step) {
+    const risposta = await fetch("{{ step_url }}", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-CSRFToken": csrfToken() },
+      body: JSON.stringify(step),
+    });
+    return risposta.json();
+  }
+
+  async function avvia() {
+    let ok = 0;
+    let errori = 0;
+    for (let i = 0; i < piano.length; i++) {
+      const step = piano[i];
+      stato.textContent = `Traduzione bio di ${step.persona_nome} in ${step.lingua_destinazione_nome}… (${i + 1}/${piano.length})`;
+      const esito = await eseguiStep(step);
+      if (esito.ok) {
+        ok++;
+      } else {
+        errori++;
+      }
+      barra.value = i + 1;
+    }
+    stato.textContent = `Fatto: ${ok} tradotte${errori ? `, ${errori} in errore` : ""}.`;
+    fine.style.display = "block";
+  }
+
+  avvia();
+})();
+</script>
+{% endif %}
+{% endblock %}

@@ -26,6 +26,7 @@ services:
     # runserver con DEBUG=True serve già i file statici da solo.
     entrypoint: []
     command: sh -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+    env_file: .env
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.dev
       DB_HOST: db

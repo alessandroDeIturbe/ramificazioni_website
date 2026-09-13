@@ -10,6 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-insecure-secret-key-change-me")
 
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -49,6 +51,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.i18n",
                 "concerti.context_processors.sostenitori",
+                "concerti.context_processors.stagioni_nav",
             ],
         },
     },
@@ -109,7 +112,7 @@ STORAGES = {
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "info@ramificazioni.ch")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "info.ramificazioni@gmail.com")
 SPONSOR_INQUIRY_EMAIL = os.environ.get("SPONSOR_INQUIRY_EMAIL", DEFAULT_FROM_EMAIL)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

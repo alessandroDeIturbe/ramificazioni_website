@@ -10,3 +10,5 @@ venv/
 .DS_Store
 *.pem
 *.key
+STATO_PROGETTO.md
+*.md

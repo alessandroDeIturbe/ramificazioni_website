@@ -10,8 +10,10 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
 - [ ] Footer con: link social, contatti, link legali (privacy/cookie), logo sostenitori, newsletter
       (parziale: social+email presenti; link legali puntano a `#`, loghi sostenitori e form newsletter mancanti)
 - [x] Switcher lingua sempre visibile in header (stub visivo — funzionalità reale in "Multilingua")
-- [ ] Pagina "Events" con calendario/lista della stagione corrente + archivio stagioni passate
-      (parziale: lista stagione corrente fatta, archivio stagioni passate solo nota placeholder)
+- [x] Pagina "Events" con calendario/lista della stagione corrente + archivio stagioni passate
+      (lista stagione corrente e passata su `/events/`; tutte le stagioni ora anche elencate
+      in un dropdown "Stagioni" in header, più recente in cima, ognuna con pagina dedicata
+      `/stagioni/<stagione>/` — sostituisce la sezione "stagione corrente" prima in home)
 - [x] Pagina singolo evento con URL propria (linkabile/condivisibile) — evento-a/b/c/d.html
 
 ## Homepage
@@ -50,7 +52,8 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
 
 - [x] Elenco musicisti/compositori/regia audio coinvolti nella stagione, con breve bio
       (solo edizione I popolata, edizioni II–IV da completare)
-- [x] Foto ritratto per ciascuno, se disponibile (placeholder grafico, nessuna foto reale ancora)
+- [x] Foto ritratto per ciascuno, se disponibile (foto reali caricate per parte dei
+      collaboratori; fix opacità CSS che le rendeva sbiadite)
 - [x] Collegamento dalla scheda contributor ai concerti in cui è coinvolto
 
 ## Multilingua
@@ -61,7 +64,9 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
       repo — non serve `makemessages`/`compilemessages` al deploy finché il testo non
       cambia). Contenuti DB traducibili (nota di programma, bio) via campi ombra per
       lingua (`_en`/`_de`/`_fr`) con fallback automatico all'italiano se non ancora
-      compilati — niente pacchetto esterno, solo 2 campi coinvolti. Nomi propri e
+      compilati — niente pacchetto esterno, solo 2 campi coinvolti. Bio traducibili
+      con assistenza Gemini da admin (azione "Traduci bio mancanti", richiede
+      `GEMINI_API_KEY`). Nomi propri e
       titoli dei brani restano volutamente in una sola lingua (convenzione musicale
       standard, non un limite tecnico).
 - [x] Switcher lingua persistente tra le pagine — form funzionante (`set_language`)

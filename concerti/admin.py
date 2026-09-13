@@ -1,4 +1,9 @@
+import json
+
 from django.contrib import admin
+from django.http import Http404, JsonResponse
+from django.shortcuts import redirect, render
+from django.urls import path, reverse
 
 from .models import (
     Brano,
@@ -9,6 +14,21 @@ from .models import (
     Sede,
     Sostenitore,
 )
+from .services import traduci_testo
+
+LINGUA_CAMPO_BIO = {"it": "bio", "en": "bio_en", "de": "bio_de", "fr": "bio_fr"}
+NOMI_LINGUA = {"it": "italiano", "en": "inglese", "de": "tedesco", "fr": "francese"}
+
+
+def _lingua_sorgente(persona):
+    return next(
+        (
+            (lingua, getattr(persona, campo))
+            for lingua, campo in LINGUA_CAMPO_BIO.items()
+            if getattr(persona, campo)
+        ),
+        None,
+    )
 
 
 class BranoInline(admin.TabularInline):
@@ -75,6 +95,76 @@ class PersonaAdmin(admin.ModelAdmin):
         (None, {"fields": ["nome", "ruolo", "strumento", "ritratto"]}),
         ("Bio", {"fields": ["bio", "bio_en", "bio_de", "bio_fr"]}),
     ]
+    actions = ["traduci_bio_mancanti"]
+
+    @admin.action(description="Traduci bio mancanti (Gemini)")
+    def traduci_bio_mancanti(self, request, queryset):
+        ids = ",".join(str(pk) for pk in queryset.values_list("pk", flat=True))
+        return redirect(f"{reverse('admin:concerti_persona_traduci_bio')}?ids={ids}")
+
+    def get_urls(self):
+        return [
+            path(
+                "traduci-bio/",
+                self.admin_site.admin_view(self.traduci_bio_piano_view),
+                name="concerti_persona_traduci_bio",
+            ),
+            path(
+                "traduci-bio/step/",
+                self.admin_site.admin_view(self.traduci_bio_step_view),
+                name="concerti_persona_traduci_bio_step",
+            ),
+        ] + super().get_urls()
+
+    def traduci_bio_piano_view(self, request):
+        ids = [int(pk) for pk in request.GET.get("ids", "").split(",") if pk]
+        piano = []
+        saltate = []
+        for persona in Persona.objects.filter(pk__in=ids):
+            sorgente = _lingua_sorgente(persona)
+            if not sorgente:
+                saltate.append(persona.nome)
+                continue
+            lingua_origine, _testo = sorgente
+            for lingua in LINGUA_CAMPO_BIO:
+                if lingua == lingua_origine or getattr(persona, LINGUA_CAMPO_BIO[lingua]):
+                    continue
+                piano.append({
+                    "persona_id": persona.pk,
+                    "persona_nome": persona.nome,
+                    "lingua_origine": lingua_origine,
+                    "lingua_destinazione": lingua,
+                    "lingua_destinazione_nome": NOMI_LINGUA[lingua],
+                })
+        return render(
+            request,
+            "admin/concerti/persona/traduci_bio.html",
+            {
+                **self.admin_site.each_context(request),
+                "piano_json": json.dumps(piano),
+                "totale": len(piano),
+                "saltate": saltate,
+                "step_url": reverse("admin:concerti_persona_traduci_bio_step"),
+                "changelist_url": reverse("admin:concerti_persona_changelist"),
+            },
+        )
+
+    def traduci_bio_step_view(self, request):
+        if request.method != "POST":
+            raise Http404
+        dati = json.loads(request.body)
+        persona = Persona.objects.get(pk=dati["persona_id"])
+        campo = LINGUA_CAMPO_BIO[dati["lingua_destinazione"]]
+        sorgente = _lingua_sorgente(persona)
+        if not sorgente:
+            return JsonResponse({"ok": False, "errore": "Nessun testo sorgente trovato."})
+        _lingua_origine, testo_origine = sorgente
+        try:
+            setattr(persona, campo, traduci_testo(testo_origine, dati["lingua_origine"], dati["lingua_destinazione"]))
+            persona.save()
+            return JsonResponse({"ok": True})
+        except RuntimeError as errore:
+            return JsonResponse({"ok": False, "errore": str(errore)})
 
 
 @admin.register(Sede)
