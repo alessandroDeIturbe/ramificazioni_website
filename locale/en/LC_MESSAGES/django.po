@@ -288,6 +288,63 @@ msgstr "Fill out the form to propose yourself as a sponsor for next season."
 msgid "Invia"
 msgstr "Send"
 
+msgid "Informativa sulla privacy"
+msgstr "Privacy notice"
+
+msgid "Titolare del trattamento"
+msgstr "Data controller"
+
+msgid "DA COMPLETARE"
+msgstr "TO BE COMPLETED"
+
+msgid "Log del server"
+msgstr "Server logs"
+
+msgid "Il sito è servito con Caddy su un server ospitato da Infomaniak (Svizzera). Il server registra tecnicamente l'indirizzo IP e i dati della richiesta, per sicurezza e funzionamento."
+msgstr "The site is served with Caddy on a server hosted by Infomaniak (Switzerland). The server technically records the IP address and request data for security and operation."
+
+msgid "Cookie"
+msgstr "Cookies"
+
+msgid "Usiamo solo cookie tecnici: csrftoken (protezione dei moduli, durata circa 1 anno) e django_language (preferenza di lingua, impostata quando scegli la lingua). Non usiamo analytics, tracciamento o banner di consenso."
+msgstr "We only use technical cookies: csrftoken (form protection, about 1 year) and django_language (language preference, set when you choose a language). We use no analytics, tracking or consent banners."
+
+msgid "Modulo sostenitori"
+msgstr "Supporters form"
+
+msgid "Se usi il modulo per i sostenitori trattiamo nome, email e messaggio. I dati vengono inviati via email, non sono salvati nel database del sito e sono conservati per 12 mesi."
+msgstr "If you use the supporters form we process your name, email and message. The data is sent by email, is not stored in the site database and is kept for 12 months."
+
+msgid "Traduzioni"
+msgstr "Translations"
+
+msgid "Le traduzioni delle biografie sono generate tramite l'API Gemini di Google (USA), con un'azione manuale dell'amministratore, su testi già pubblici."
+msgstr "Biography translations are generated through Google's Gemini API (USA), by a manual administrator action, on texts that are already public."
+
+msgid "Link esterni"
+msgstr "External links"
+
+msgid "Il sito rimanda a Instagram: una volta aperto il link valgono le regole di quel servizio."
+msgstr "The site links to Instagram: once you open the link, that service's rules apply."
+
+msgid "I tuoi diritti"
+msgstr "Your rights"
+
+msgid "Secondo la nDSG e il GDPR puoi chiedere accesso, rettifica e cancellazione dei tuoi dati scrivendo a info.ramificazioni@gmail.com. Puoi rivolgerti all'autorità di controllo: l'Incaricato federale della protezione dei dati e della trasparenza (IFPDT)."
+msgstr "Under the Swiss FADP and the GDPR you can request access, rectification and erasure of your data by writing to info.ramificazioni@gmail.com. You may contact the supervisory authority: the Federal Data Protection and Information Commissioner (FDPIC)."
+
+msgid "Ragione sociale"
+msgstr "Legal name"
+
+msgid "Indirizzo postale (via, CAP, località)"
+msgstr "Postal address (street, postcode, town)"
+
+msgid "Responsabile"
+msgstr "Responsible person"
+
+msgid "I dati inseriti sono usati solo per risponderti e conservati al massimo 12 mesi. Vedi la <a href=\"%(privacy_url)s\">privacy policy</a>."
+msgstr "The data you enter is used only to reply to you and kept for 12 months at most. See the <a href=\"%(privacy_url)s\">privacy policy</a>."
+
 #~ msgid "About"
 #~ msgstr "About"
 

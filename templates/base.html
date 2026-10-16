@@ -7,9 +7,6 @@
 <title>{% block title %}Ramificazioni{% endblock %}</title>
 <meta name="description" content="{% block description %}{% trans 'Ramificazioni è una rassegna indipendente di musica da camera contemporanea ed elettroacustica.' %}{% endblock %}">
 {% block og %}{% endblock %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -65,8 +62,8 @@
     <a href="mailto:info.ramificazioni@gmail.com">info.ramificazioni@gmail.com</a>
   </div>
   <div class="col">
-    <a href="{% url 'concerti:contacts' %}">{% trans "Privacy" %}</a>
-    <a href="{% url 'concerti:contacts' %}">{% trans "Impressum" %}</a>
+    <a href="{% url 'concerti:privacy' %}">{% trans "Privacy" %}</a>
+    <a href="{% url 'concerti:impressum' %}">{% trans "Impressum" %}</a>
   </div>
   {% if sostenitori_footer %}
   <div class="col supporters">

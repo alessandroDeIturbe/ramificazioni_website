@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Privacy" %} — Ramificazioni{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>{% trans "Informativa sulla privacy" %}</h1>
+  <p>{% trans "Titolare del trattamento" %}: <strong>{% trans "DA COMPLETARE" %}</strong> — <a href="mailto:info.ramificazioni@gmail.com">info.ramificazioni@gmail.com</a></p>
+</section>
+
+<section>
+  <h2>{% trans "Log del server" %}</h2>
+  <p class="supporters-note">{% trans "Il sito è servito con Caddy su un server ospitato da Infomaniak (Svizzera). Il server registra tecnicamente l'indirizzo IP e i dati della richiesta, per sicurezza e funzionamento." %}</p>
+</section>
+
+<section>
+  <h2>{% trans "Cookie" %}</h2>
+  <p class="supporters-note">{% trans "Usiamo solo cookie tecnici: csrftoken (protezione dei moduli, durata circa 1 anno) e django_language (preferenza di lingua, impostata quando scegli la lingua). Non usiamo analytics, tracciamento o banner di consenso." %}</p>
+</section>
+
+<section>
+  <h2>{% trans "Modulo sostenitori" %}</h2>
+  <p class="supporters-note">{% trans "Se usi il modulo per i sostenitori trattiamo nome, email e messaggio. I dati vengono inviati via email, non sono salvati nel database del sito e sono conservati per 12 mesi." %}</p>
+</section>
+
+<section>
+  <h2>{% trans "Traduzioni" %}</h2>
+  <p class="supporters-note">{% trans "Le traduzioni delle biografie sono generate tramite l'API Gemini di Google (USA), con un'azione manuale dell'amministratore, su testi già pubblici." %}</p>
+</section>
+
+<section>
+  <h2>{% trans "Link esterni" %}</h2>
+  <p class="supporters-note">{% trans "Il sito rimanda a Instagram: una volta aperto il link valgono le regole di quel servizio." %}</p>
+</section>
+
+<section>
+  <h2>{% trans "I tuoi diritti" %}</h2>
+  <p class="supporters-note">{% trans "Secondo la nDSG e il GDPR puoi chiedere accesso, rettifica e cancellazione dei tuoi dati scrivendo a info.ramificazioni@gmail.com. Puoi rivolgerti all'autorità di controllo: l'Incaricato federale della protezione dei dati e della trasparenza (IFPDT)." %}</p>
+</section>
+
+{% endblock %}

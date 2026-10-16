@@ -29,9 +29,11 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
 ## Pagina Evento/Concerto
 
 - [x] Data, ora, sede (nome luogo + indirizzo) — valori segnaposto
-- [ ] Programma musicale: compositore(i) in cartellone, titoli dei brani eseguiti
-      (parziale: compositore segnaposto presente, titoli dei brani non ancora inclusi)
-- [x] Interpreti/formazione (nomi + strumento/ruolo) — segnaposto
+- [x] Programma musicale: compositore(i) in cartellone, titoli dei brani eseguiti
+      (importati per tutti e 4 i concerti 2025/26 da "PROGRAMMI SALA", vedi
+      STATO_PROGETTO.md)
+- [x] Interpreti/formazione (nomi + strumento/ruolo) — bio compilate per 25 persone da
+      "PROGRAMMI SALA" (vedi STATO_PROGETTO.md); 3 senza bio disponibile nei PDF
 - [x] Ruolo "Regia Audio" (elettronica live) sempre indicato distintamente dagli altri interpreti
 - [x] Nota di programma / testo introduttivo sul compositore o sul concerto — sezione presente, testo da scrivere
 - [x] Indicazione se è prima esecuzione/prima svizzera/prima assoluta, quando applicabile — riga presente, da compilare
@@ -112,9 +114,16 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
 
 ## Legale/Privacy
 
-- [ ] Pagina Privacy Policy (trattamento dati form contatto/newsletter, GDPR/LPD svizzera)
+> Audit del 16/10/2026: vedi `AUDIT_PRIVACY.md` (rilievi, fix e checklist dati da fornire). Aperti: self-host Google Fonts
+> (`base.html:10-12`), pagine Privacy/Impressum reali (oggi i link del footer puntano a `contacts`), informativa sotto il
+> form sponsor, cookie tecnici (`csrftoken` su ogni pagina, `django_language`) da elencare in policy, EXIF delle foto,
+> rotazione backup/log.
+
+- [~] Pagina Privacy Policy (trattamento dati form contatto/newsletter, GDPR/LPD svizzera)
+      (pagina creata in locale, non deployata; titolare da completare)
 - [ ] Cookie banner minimale se si usano cookie di tracciamento/analytics
-- [ ] Pagina Impressum/note legali
+- [~] Pagina Impressum/note legali
+      (pagina creata in locale, non deployata; ragione sociale/indirizzo/responsabile da completare)
 
 ## Accessibilità
 

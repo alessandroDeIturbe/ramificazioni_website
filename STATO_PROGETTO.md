@@ -283,3 +283,23 @@ certificati Let's Encrypt per apex e www (scadenza 14/01/2027, rinnovo automatic
 HTTP/2 + h3 annunciato, HSTS, http→https 308, www→apex 301 (v4 e v6), media 200 image/jpeg, /admin/login/ 200.
 Fino a ~11:30 UTC qualche resolver può avere ancora in cache i vecchi record www troncati (TTL 1h).
 Prossimi passi: backup automatico DB (pg_dump + systemd timer) da implementare.
+
+## Audit privacy/cookie CH+UE (2026-10-16) — solo analisi, nessun fix applicato
+Report completo in `AUDIT_PRIVACY.md`. Sintesi: nessun tracking/analytics; cookie solo tecnici (`csrftoken` su ogni
+pagina perché il form `set_language` è in `base.html`, `django_language` al click). Da sistemare, in ordine:
+1. Google Fonts da CDN (`templates/base.html:10-12`) → self-host in `static/fonts/`.
+2. Privacy e Impressum inesistenti (footer `base.html:68-69` punta a `contacts`) → pagine reali IT/EN/DE/FR.
+3. Form sponsor (`concerti/forms.py`) senza informativa/retention.
+4. Bio inviate a Gemini (USA), liberatorie ritratti/foto, EXIF non ripulito, log Caddy e rotazione backup da definire.
+Servono dati dall'utente: forma giuridica/indirizzo organizzatore, titolare, provider SMTP, liberatorie, tier Gemini.
+Stato git: blue riallineato a `origin/development` (commit `205074e`, comandi di import + STATO_PROGETTO), non pushato;
+backup della vecchia storia nel branch `backup/pre-realign-11609da`.
+
+### Fix privacy applicati in locale (2026-10-16) — NON committati, NON deployati (live è ancora green senza questi fix)
+- Google Fonts self-host: `static/fonts/` (14 woff2) + `@font-face` in `style.css`; tolte le righe Google da `base.html`.
+- Pagine `/<lang>/privacy/` e `/<lang>/impressum/` (views, urls, `templates/concerti/privacy.html`, `impressum.html`), footer corretto. Campi titolare/ragione sociale/indirizzo/responsabile = «DA COMPLETARE».
+- Informativa + link privacy sotto il form di `sostenitori.html`.
+- EXIF: `concerti/imaging.py` (pre_save su Persona/FotoConcerto/Sostenitore), comando `strip_exif [--dry-run]` (NON lanciato sui media reali), test `concerti/tests.py`. JPEG ruotati ricodificati a q95.
+- `scripts/backup-db.sh`: rotazione 30 giorni (ma il backup su questa prod è ancora da riscrivere: usa docker).
+- Traduzioni EN/DE/FR aggiunte ai `.po`; `msgfmt` NON è installato sulla VPS: i `.mo` sono stati generati con uno script Python (verificato che le stringhe si caricano). Meglio rigenerarli con `compilemessages` dove c'è gettext.
+Resta: compilare i dati «DA COMPLETARE», verificare log Caddy (nessuna direttiva `log`), liberatorie, tier Gemini, deploy.

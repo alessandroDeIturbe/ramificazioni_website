@@ -49,6 +49,14 @@ def contacts(request):
     return render(request, "concerti/contacts.html")
 
 
+def privacy(request):
+    return render(request, "concerti/privacy.html")
+
+
+def impressum(request):
+    return render(request, "concerti/impressum.html")
+
+
 def sostenitori(request):
     if request.method == "POST":
         form = SponsorInquiryForm(request.POST)

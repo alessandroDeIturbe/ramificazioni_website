@@ -247,3 +247,9 @@ class Sostenitore(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+# Rimuove EXIF/GPS dalle immagini caricate (vedi concerti/imaging.py)
+from .imaging import connect as _connect_strip_exif  # noqa: E402
+
+_connect_strip_exif(Persona, FotoConcerto, Sostenitore)

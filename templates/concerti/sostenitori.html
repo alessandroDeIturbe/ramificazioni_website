@@ -38,6 +38,8 @@
     {% endfor %}
     <button type="submit" class="cta" style="align-self:flex-start;">{% trans "Invia" %}</button>
   </form>
+  {% url 'concerti:privacy' as privacy_url %}
+  <p style="font-size:var(--small-size);">{% blocktrans %}I dati inseriti sono usati solo per risponderti e conservati al massimo 12 mesi. Vedi la <a href="{{ privacy_url }}">privacy policy</a>.{% endblocktrans %}</p>
 </section>
 
 {% endblock %}

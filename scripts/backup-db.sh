@@ -17,3 +17,6 @@ docker compose -f docker-compose.prod.yml exec -T db \
   pg_dump -U "${DB_USER:-ramificazioni}" "${DB_NAME:-ramificazioni}" | gzip > "$FILE"
 
 echo "Backup salvato in $FILE"
+
+# Rotazione: elimina backup piu' vecchi di 30 giorni
+find backups -name 'ramificazioni-*.sql.gz' -mtime +30 -delete
