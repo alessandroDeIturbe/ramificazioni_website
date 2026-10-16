@@ -21,5 +21,5 @@ def stagioni_nav(request):
 
 
 def legale(request):
-    """Dati legali (titolare, indirizzo...) per le pagine Privacy e Impressum."""
-    return {"legale": settings.LEGAL}
+    """Dati legali per Privacy/Impressum + host di anteprima per il link nell'admin."""
+    return {"legale": settings.LEGAL, "preview_host": settings.PREVIEW_HOST}

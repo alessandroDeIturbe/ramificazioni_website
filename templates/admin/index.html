@@ -1,0 +1,8 @@
+{% extends "admin/index.html" %}
+{% block content %}
+<p style="margin:0 0 1rem;">
+  <a class="button" style="padding:.5rem 1rem;" href="https://{{ preview_host }}/" target="_blank" rel="noopener">Anteprima versione non deployata</a>
+  <small>(si apre sul colore blue/green non live; ti chiede di accedere di nuovo)</small>
+</p>
+{{ block.super }}
+{% endblock %}

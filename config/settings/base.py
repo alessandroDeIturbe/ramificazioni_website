@@ -32,6 +32,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "concerti.middleware.PreviewStaffOnlyMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -122,5 +123,8 @@ LEGAL = {
     for k in ("titolare", "ragione_sociale", "indirizzo", "responsabile", "telefono", "email")
 }
 LEGAL["email"] = LEGAL["email"] or DEFAULT_FROM_EMAIL
+
+# Anteprima della versione non live (colore blue/green idle), solo per staff: vedi PreviewStaffOnlyMiddleware.
+PREVIEW_HOST = os.environ.get("PREVIEW_HOST", "anteprima.ramificazioni.ch")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

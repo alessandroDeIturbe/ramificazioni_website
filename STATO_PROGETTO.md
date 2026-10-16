@@ -309,3 +309,15 @@ Privacy/Impressum leggono titolare, ragione sociale, indirizzo, responsabile, te
 (variabili `LEGAL_*` nel `.env`, non in git; context processor `concerti.context_processors.legale`). Se vuote, i template
 mostrano «DA COMPLETARE». Si compilano con `./scripts/compila-dati-legali.sh` (chiede i dati, valida, fa backup `.env.bak`,
 scrive nel `.env` condiviso da blue e green). Dopo averlo eseguito: deploy/restart del servizio, i valori si leggono all'avvio.
+
+### Anteprima della versione non deployata (2026-10-16)
+Il colore blue/green NON live è visibile su `https://anteprima.ramificazioni.ch/` solo a chi è staff: link
+«Anteprima versione non deployata» nella dashboard admin (`templates/admin/index.html`). Sull'host di anteprima il login è
+separato da quello del sito (cookie per host). Codice: `PreviewStaffOnlyMiddleware` (`concerti/middleware.py`, test in
+`concerti/tests.py`), `settings.PREVIEW_HOST` (env `PREVIEW_HOST`, default anteprima.ramificazioni.ch, aggiunto ad ALLOWED_HOSTS in prod).
+Deploy (`../deploy-ramificazioni.sh`, fuori da git; copia pre-modifica: `deploy-ramificazioni.sh.bak-prima-anteprima`):
+- `preview [ref]` = deploy sul colore idle SENZA switch; `switch` = mette live il colore idle; `update` invariato (switcha subito).
+- `flip_caddy` ora scambia le porte di TUTTI i `reverse_proxy` (live e anteprima).
+- `enable-preview` (una tantum): aggiunge il blocco `anteprima.<dominio>` a Caddy, valida e ricarica. NON ancora eseguito.
+Da fare dall'utente: record DNS A 179.237.121.137 e AAAA 2001:1600:18:20c::224 per `anteprima.ramificazioni.ch`, poi deploy del codice e `enable-preview`.
+Nota: `preview`/`update` eseguono `migrate` sul DB condiviso: le migrazioni toccano anche il sito live.

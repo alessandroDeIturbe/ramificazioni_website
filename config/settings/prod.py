@@ -5,7 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 from .base import *  # noqa: F401,F403
 
 DEBUG = False
-ALLOWED_HOSTS = [h for h in os.environ.get("ALLOWED_HOSTS", "").split(",") if h]
+ALLOWED_HOSTS = [h for h in os.environ.get("ALLOWED_HOSTS", "").split(",") if h] + [PREVIEW_HOST]
 
 if SECRET_KEY == "dev-insecure-secret-key-change-me":
     raise ImproperlyConfigured(

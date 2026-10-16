@@ -32,3 +32,26 @@ class StripExifTest(SimpleTestCase):
             self.assertEqual(open(f"{d}/a.jpg", "rb").read(), src)
             call_command("strip_exif", root=d)
             self.assertEqual(len(Image.open(f"{d}/a.jpg").getexif()), 0)
+
+
+class PreviewStaffOnlyTest(SimpleTestCase):
+    """L'host di anteprima rimanda al login chi non e' staff; gli altri host passano."""
+
+    def _get(self, host, path, staff):
+        from types import SimpleNamespace
+
+        from django.test import RequestFactory, override_settings
+
+        from .middleware import PreviewStaffOnlyMiddleware
+
+        request = RequestFactory().get(path, HTTP_HOST=host)
+        request.user = SimpleNamespace(is_staff=staff)
+        with override_settings(PREVIEW_HOST="anteprima.test", ALLOWED_HOSTS=["*"]):
+            return PreviewStaffOnlyMiddleware(lambda r: "ok")(request)
+
+    def test_anteprima(self):
+        self.assertEqual(self._get("anteprima.test", "/it/", False).status_code, 302)
+        self.assertEqual(self._get("anteprima.test", "/it/", True), "ok")
+        self.assertEqual(self._get("anteprima.test", "/admin/login/", False), "ok")
+        self.assertEqual(self._get("anteprima.test", "/static/a.css", False), "ok")
+        self.assertEqual(self._get("ramificazioni.ch", "/it/", False), "ok")
