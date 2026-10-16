@@ -93,7 +93,7 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
 - [ ] Link social in header/footer con icone coerenti col logo a tratto (§6 design system)
       (parziale: link testuali presenti, icone non ancora fatte)
 - [ ] Meta tag Open Graph/Twitter Card per condivisione social delle pagine evento
-      (parziale: solo `og:title`/`og:type` su evento-a.html; mancano su tutte le altre pagine, manca immagine preview e Twitter Card)
+      (parziale: og:url/site_name/type + twitter:card su tutte le pagine; og:title/og:image (prima foto) sulle pagine evento; manca immagine OG raster di default)
 
 ## Sostenitori/Partner
 
@@ -109,8 +109,9 @@ Checklist funzionale/contenuti basata su ricerca di siti comparabili: rassegne s
       (parziale: presenti per ogni pagina, solo in italiano)
 - [ ] Immagini poster/locandina ottimizzate (formati moderni, lazy-loading galleria eventi)
       (non ancora applicabile: nessuna galleria fotografica presente)
-- [ ] Sitemap.xml e robots.txt
-- [ ] Markup dati strutturati evento (schema.org `Event`) per ogni concerto
+- [x] Sitemap.xml e robots.txt (sitemap i18n 4 lingue, solo contenuti pubblicati — in dev, non deployato)
+- [x] Markup dati strutturati evento (schema.org `MusicEvent`) per ogni concerto pubblicato con sede + `Organization` in home
+- [x] Canonical + hreflang it/de/fr/en/x-default su tutte le pagine
 
 ## Legale/Privacy
 

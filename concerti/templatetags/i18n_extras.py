@@ -1,6 +1,7 @@
 import re
 
 from django import template
+from django.urls import translate_url
 
 register = template.Library()
 
@@ -21,3 +22,12 @@ def strip_lang_prefix(path):
     per questo esatto caso.
     """
     return _LANG_PREFIX_RE.sub("/", path) or "/"
+
+
+@register.simple_tag(takes_context=True)
+def url_lingua(context, lang):
+    """URL assoluto della pagina corrente nella lingua `lang` (canonical/hreflang), senza query string."""
+    request = context.get("request")
+    if request is None:
+        return ""
+    return request.build_absolute_uri(translate_url(request.path, lang))

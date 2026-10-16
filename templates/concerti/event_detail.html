@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{{ concerto.data|date:"d F Y" }} — Ramificazioni{% endblock %}
-{% block description %}{% trans "Ramificazioni" %}, {% trans "edizione" %} {{ concerto.numero_edizione }} — {{ concerto.data|date:"d F Y" }}{% endblock %}
+{% block title %}{% trans "Edizione" %} {{ concerto.numero_edizione }} · {{ concerto.stagione }} — {{ concerto.data|date:"d F Y" }} — Ramificazioni{% endblock %}
+{% block description %}{% if concerto.nota_programma_localizzata %}{{ concerto.nota_programma_localizzata|striptags|truncatechars:155 }}{% else %}{% trans "Ramificazioni" %}, {% trans "edizione" %} {{ concerto.numero_edizione }} — {{ concerto.data|date:"d F Y" }}{% endif %}{% endblock %}
 {% block og %}
-<meta property="og:title" content="Ramificazioni — {{ concerto.data|date:'d F Y' }}">
+<meta property="og:title" content="Ramificazioni — {% trans 'Edizione' %} {{ concerto.numero_edizione }} · {{ concerto.data|date:'d F Y' }}">
 <meta property="og:type" content="website">
+{% with foto=concerto.foto.all.0 %}{% if foto %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ foto.immagine.url }}">
+<meta name="twitter:card" content="summary_large_image">
+{% else %}<meta name="twitter:card" content="summary">{% endif %}{% endwith %}
 {% endblock %}
 {% block content %}
 

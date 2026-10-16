@@ -345,3 +345,19 @@ Navbar: Home · Chi siamo · Stagione · Contatti · Sostenitori · Archivio (me
 - `update [ref]` resta il deploy da GitHub (`origin/development`) con switch immediato.
 - `CLAUDE.md` (ignorato da git per `*.md`) è copiato anche in `ramificazioni_dev`; gli zip/`errore.png` non tracciati sono rimasti in blue.
 - `compila-dati-legali.sh` dalla copia di sviluppo: passa il percorso del `.env` (`../ramificazioni_website/.env`).
+
+### SEO tecnico (2026-10-16) — in `ramificazioni_dev`, NON committato/deployato
+Backup pre-modifica: `backups/SEO_20261016_164339_pre-modification/` (ignorato da git).
+- `/robots.txt` (view in `config/urls.py`): Disallow `/admin/`, `/i18n/` + `Sitemap:` assoluta (host della richiesta).
+- `/sitemap.xml` (`concerti/sitemaps.py`): pagine statiche + Archivio, concerti **pubblicati** (lastmod `aggiornato_il`), stagioni con
+  concerti pubblicati; ogni URL nelle 4 lingue con `xhtml:link` hreflang. Niente `x-default` in sitemap: quello di Django toglie `/it/`
+  e con `prefix_default_language=True` darebbe un 302. `/contributors/` (301) escluso. Nessun `contrib.sites`, nessuna migrazione.
+- `base.html`: canonical (path senza query), hreflang it/de/fr/en + x-default→`/it/…`, `og:url`, `og:site_name`, `og:type`, `twitter:card`;
+  tag `url_lingua` in `i18n_extras.py` (usa `translate_url`).
+- `event_detail.html`: title «Edizione N · stagione — data», description dalla nota di programma (155 car.), `og:title`, `og:image` = prima foto.
+- JSON-LD (`concerti/views.py`, `_jsonld` escapa `< > &`): Organization in home; MusicEvent sugli eventi pubblicati **con sede**
+  (senza sede niente JSON-LD: `location` è obbligatoria). startDate con offset Europe/Zurich.
+- Test `SeoTest` in `concerti/tests.py` (8/8 OK con SQLite in memoria: settings temporanei fuori dal repo + `StaticFilesStorage`,
+  perché in dev non c'è `staticfiles/`). `check`, `check --deploy`, `makemigrations --check`: puliti.
+- Manca: immagine OG raster 1200×630 di default (oggi solo logo SVG, non accettato da Facebook/LinkedIn).
+- Dopo il deploy: inviare `https://ramificazioni.ch/sitemap.xml` a Search Console, Rich Results Test su una pagina evento.

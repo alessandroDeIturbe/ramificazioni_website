@@ -1,15 +1,77 @@
+import datetime
+import json
+
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.templatetags.static import static
+from django.utils import timezone
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 
 from .forms import SponsorInquiryForm
 from .models import Brano, Concerto, FotoConcerto, Persona, Sostenitore
 
+_JSON_SCRIPT_ESCAPES = {ord("<"): "\\u003c", ord(">"): "\\u003e", ord("&"): "\\u0026"}
+
+
+def _jsonld(data):
+    """JSON-LD da mettere dentro <script>: < > & escapati, quindi nessun testo da admin può chiudere il tag."""
+    return mark_safe(json.dumps(data, ensure_ascii=False).translate(_JSON_SCRIPT_ESCAPES))
+
+
+def _organization(request):
+    return {
+        "@type": "Organization",
+        "name": "Ramificazioni",
+        "url": request.build_absolute_uri("/"),
+        "logo": request.build_absolute_uri(static("img/ramificazioni_logo.svg")),
+        "email": "info.ramificazioni@gmail.com",
+        "sameAs": ["https://www.instagram.com/ramificazioni.festival"],
+    }
+
+
+def _music_event(request, c):
+    """schema.org MusicEvent; None se manca la sede (location è obbligatoria per Google)."""
+    if not c.sede:
+        return None
+    start = c.data.isoformat()
+    if c.ora:
+        start = timezone.make_aware(datetime.datetime.combine(c.data, c.ora)).isoformat()
+    evento = {
+        "@context": "https://schema.org",
+        "@type": "MusicEvent",
+        "name": f"Ramificazioni — {_('Edizione')} {c.numero_edizione} ({c.stagione})",
+        "startDate": start,
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "url": request.build_absolute_uri(request.path),
+        "location": {"@type": "Place", "name": c.sede.nome, "address": c.sede.indirizzo or c.sede.nome},
+        "organizer": _organization(request),
+        "performer": [
+            {"@type": "Person", "name": p.persona.nome}
+            for p in c.partecipazioni.all()
+            if p.persona.ruolo in ("interprete", "regia_audio")
+        ],
+        "workPerformed": [
+            {"@type": "MusicComposition", "name": b.titolo, "composer": {"@type": "Person", "name": b.compositore}}
+            for b in c.brani.all()
+        ],
+    }
+    if c.link_prenotazione:
+        evento["offers"] = {"@type": "Offer", "url": c.link_prenotazione}
+    foto = c.foto.all()  # già prefetchate
+    if foto:
+        evento["image"] = [request.build_absolute_uri(f.immagine.url) for f in foto[:3]]
+    if c.nota_programma_localizzata:
+        evento["description"] = c.nota_programma_localizzata[:500]
+    return evento
+
 
 def home(request):
     prossimo = Concerto.objects.futuri().select_related("sede").first()
-    return render(request, "concerti/home.html", {"prossimo": prossimo})
+    org = {"@context": "https://schema.org", **_organization(request)}
+    return render(request, "concerti/home.html", {"prossimo": prossimo, "jsonld": _jsonld(org)})
 
 
 def events_list(request):
@@ -26,7 +88,10 @@ def event_detail(request, slug):
         ),
         slug=slug,
     )
-    return render(request, "concerti/event_detail.html", {"concerto": concerto})
+    evento = _music_event(request, concerto)
+    return render(
+        request, "concerti/event_detail.html", {"concerto": concerto, "jsonld": evento and _jsonld(evento)}
+    )
 
 
 def stagione_detail(request, stagione):
