@@ -332,3 +332,16 @@ Navbar: Home · Chi siamo · Stagione · Contatti · Sostenitori · Archivio (me
 - Migrazione `0004_brano_commissione` (BooleanField con `db_default=False`: il codice vecchio sul DB condiviso continua a funzionare). `preview`/`update` la applicano
   anche al DB del sito live. Nell'admin il flag «commissione Ramificazioni» è nell'inline dei brani: va spuntato a mano sui brani commissionati.
 - Traduzioni EN/DE/FR aggiunte (`.mo` generati con script Python, vedi nota sopra).
+
+### Flusso di lavoro: copia di sviluppo + anteprima di codice non pushato (2026-10-16)
+**Si sviluppa e si committa SOLO in `/home/debian/apps/ramificazioni_dev`** (clone di GitHub, branch `development`).
+`ramificazioni_website` (blue) e `ramificazioni_website-green` sono solo deploy: restano detached sul commit deployato, non vanno modificati a mano
+(prima i file di sviluppo finivano nel colore live: rischio di errori al primo riavvio). Test dalla copia di sviluppo con il venv di blue:
+`DJANGO_SETTINGS_MODULE=config.settings.dev /home/debian/apps/ramificazioni_website/.venv/bin/python manage.py test` (non serve .env; il `.env` vive in blue).
+- `./deploy-ramificazioni.sh preview [ref]`: prende `[ref]` (default branch `development`) da `ramificazioni_dev`, ANCHE se non pushato,
+  lo deploya sul colore non live (migrate + restart) senza toccare Caddy; si vede su `anteprima.ramificazioni.ch` dalla dashboard admin.
+  Serve un commit (anche provvisorio): le modifiche non committate non passano. Se il commit non è su GitHub lo script avvisa.
+- Per andare live: `git push` dalla copia di sviluppo, poi `./deploy-ramificazioni.sh switch` (il colore in anteprima è già sul commit giusto).
+- `update [ref]` resta il deploy da GitHub (`origin/development`) con switch immediato.
+- `CLAUDE.md` (ignorato da git per `*.md`) è copiato anche in `ramificazioni_dev`; gli zip/`errore.png` non tracciati sono rimasti in blue.
+- `compila-dati-legali.sh` dalla copia di sviluppo: passa il percorso del `.env` (`../ramificazioni_website/.env`).
