@@ -147,3 +147,10 @@ Il sito è ora un'app Django (Postgres + admin) — non più HTML statico. La da
 - [x] Gestione multilingua dei contenuti editoriali dal medesimo pannello — i campi
       `_en`/`_de`/`_fr` di nota di programma e bio sono editabili nella stessa scheda
       admin del contenuto italiano (vedi "Multilingua")
+
+## Navigazione/Archivio (16/10/2026)
+
+- [x] Navbar: Home, Chi siamo, Stagione, Contatti, Sostenitori, Archivio (via «Stagioni» e «Collaboratori»)
+- [x] Archivio con sottopagine: Edizioni, Commissioni, Compositori, Interpreti, Photo Gallery
+- [ ] Spuntare «commissione Ramificazioni» sui brani commissionati (admin) e popolare foto/ritratti
+- [ ] Deploy (richiede la migrazione 0004)

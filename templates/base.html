@@ -19,18 +19,15 @@
   <nav class="site-nav" aria-label="{% trans 'Navigazione principale' %}">
     <a href="{% url 'concerti:home' %}">{% trans "Home" %}</a>
     <a href="{% url 'concerti:about' %}">{% trans "Chi siamo" %}</a>
-    <a href="{% url 'concerti:events_list' %}">{% trans "Eventi" %}</a>
-    <div class="nav-dropdown">
-      <span tabindex="0">{% trans "Stagioni" %}</span>
-      <div class="nav-dropdown-menu">
-        {% for s in stagioni_nav %}
-          <a href="{% url 'concerti:stagione_detail' s.stagione %}">{{ s.stagione }}</a>
-        {% endfor %}
-      </div>
-    </div>
+    <a href="{% url 'concerti:events_list' %}">{% trans "Stagione" %}</a>
     <a href="{% url 'concerti:contacts' %}">{% trans "Contatti" %}</a>
     <a href="{% url 'concerti:sostenitori' %}">{% trans "Sostenitori" %}</a>
-    <a href="{% url 'concerti:contributors' %}">{% trans "Collaboratori" %}</a>
+    <div class="nav-dropdown">
+      <span tabindex="0"><a href="{% url 'concerti:archivio' %}">{% trans "Archivio" %}</a></span>
+      <div class="nav-dropdown-menu">
+        {% include "concerti/_archivio_links.html" %}
+      </div>
+    </div>
   </nav>
   <form action="{% url 'set_language' %}" method="post" class="lang-switch">
     {% csrf_token %}

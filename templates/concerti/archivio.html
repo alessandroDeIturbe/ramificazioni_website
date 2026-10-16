@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Archivio" %} — Ramificazioni{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>{% trans "Archivio" %}</h1>
+  <p>{% trans "La storia del festival: edizioni, commissioni, compositori, interpreti e fotografie." %}</p>
+</section>
+
+<section>
+  <nav class="archivio-links" aria-label="{% trans 'Archivio' %}">
+    {% include "concerti/_archivio_links.html" %}
+  </nav>
+</section>
+
+{% endblock %}

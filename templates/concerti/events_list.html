@@ -1,39 +1,24 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Eventi" %} — Ramificazioni{% endblock %}
+{% block title %}{% trans "Stagione" %} {{ stagione }} — Ramificazioni{% endblock %}
 {% block content %}
 
 <section class="intro">
-  <h1>{% trans "Stagione" %}</h1>
+  <h1>{% trans "Stagione" %} {{ stagione }}</h1>
+  <p class="supporters-note"><a href="{% url 'concerti:archivio_edizioni' %}">{% trans "Edizioni precedenti nell'Archivio" %} →</a></p>
 </section>
 
 <div class="season-grid">
-  {% for c in futuri %}
-  <a class="season-card" style="background: {{ c.gradiente_css }};" href="{% url 'concerti:event_detail' c.slug %}">
+  {% for c in concerti %}
+  <a class="season-card" style="background: {{ c.gradiente_css }};{% if c.is_passato %} opacity: 0.75;{% endif %}" href="{% url 'concerti:event_detail' c.slug %}">
     <div>
       <p class="date">{{ c.data|date:"d F Y" }}</p>
-      <h3>{{ c.stagione }} · {% trans "Edizione" %} {{ c.numero_edizione }}</h3>
+      <h3>{% trans "Edizione" %} {{ c.numero_edizione }}</h3>
     </div>
     {% if c.compositori %}<p class="composer">{% trans "Musiche di" %} {% for p in c.compositori %}{{ p.persona.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% endif %}
   </a>
   {% empty %}
-  <p>{% trans "Nessun concerto futuro pubblicato al momento." %}</p>
-  {% endfor %}
-</div>
-
-<section>
-  <h2>{% trans "Stagioni passate" %}</h2>
-</section>
-<div class="season-grid">
-  {% for c in passati %}
-  <a class="season-card" style="background: {{ c.gradiente_css }}; opacity: 0.75;" href="{% url 'concerti:event_detail' c.slug %}">
-    <div>
-      <p class="date">{{ c.data|date:"d F Y" }}</p>
-      <h3>{{ c.stagione }} · {% trans "Edizione" %} {{ c.numero_edizione }}</h3>
-    </div>
-  </a>
-  {% empty %}
-  <p class="supporters-note">{% trans "L'archivio si popolerà automaticamente a fine stagione." %}</p>
+  <p>{% trans "Nessun concerto pubblicato al momento." %}</p>
   {% endfor %}
 </div>
 

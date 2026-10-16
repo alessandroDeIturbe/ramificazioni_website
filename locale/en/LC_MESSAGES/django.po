@@ -348,6 +348,48 @@ msgstr "The data you enter is used only to reply to you and kept for 12 months a
 msgid "Telefono"
 msgstr "Phone"
 
+msgid "Archivio"
+msgstr "Archive"
+
+msgid "Edizioni"
+msgstr "Editions"
+
+msgid "Commissioni"
+msgstr "Commissions"
+
+msgid "Compositori"
+msgstr "Composers"
+
+msgid "Photo Gallery"
+msgstr "Photo Gallery"
+
+msgid "Brani scritti per Ramificazioni."
+msgstr "Works written for Ramificazioni."
+
+msgid "La storia del festival: edizioni, commissioni, compositori, interpreti e fotografie."
+msgstr "The history of the festival: editions, commissions, composers, performers and photographs."
+
+msgid "Edizioni precedenti nell'Archivio"
+msgstr "Previous editions in the Archive"
+
+msgid "Le commissioni verranno pubblicate a breve."
+msgstr "Commissions will be published soon."
+
+msgid "Le fotografie verranno pubblicate a breve."
+msgstr "Photographs will be published soon."
+
+msgid "Le schede verranno pubblicate a breve."
+msgstr "Profiles will be published soon."
+
+msgid "Nessun concerto pubblicato al momento."
+msgstr "No concerts published at the moment."
+
+msgid "Nessuna edizione pubblicata al momento."
+msgstr "No editions published at the moment."
+
+msgid "Nessun concerto pubblicato per questa stagione."
+msgstr "No concerts published for this season."
+
 #~ msgid "About"
 #~ msgstr "About"
 

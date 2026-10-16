@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Commissioni" %} — {% trans "Archivio" %} — Ramificazioni{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>{% trans "Commissioni" %}</h1>
+  <p>{% trans "Brani scritti per Ramificazioni." %}</p>
+</section>
+
+<section>
+  <ul class="commissioni-list">
+    {% for b in brani %}
+    <li>
+      <strong>{{ b.compositore }}</strong> — {{ b.titolo }}
+      <a href="{% url 'concerti:event_detail' b.concerto.slug %}">{{ b.concerto.stagione }} · {{ b.concerto.data|date:"d M Y" }} →</a>
+    </li>
+    {% empty %}
+    <li class="supporters-note">{% trans "Le commissioni verranno pubblicate a breve." %}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% endblock %}

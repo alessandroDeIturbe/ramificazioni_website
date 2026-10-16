@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Collaboratori" %} — Ramificazioni{% endblock %}
+{% block title %}{{ titolo }} — {% trans "Archivio" %} — Ramificazioni{% endblock %}
 {% block content %}
 
 <section class="intro">
-  <h1>{% trans "Collaboratori" %}</h1>
-  <p>{% trans "Interpreti, compositori e regia audio della stagione." %}</p>
+  <h1>{{ titolo }}</h1>
 </section>
 
 <section>
@@ -21,7 +20,7 @@
       {% endfor %}
     </div>
     {% empty %}
-    <p>{% trans "Le schede dei contributor verranno pubblicate a breve." %}</p>
+    <p>{% trans "Le schede verranno pubblicate a breve." %}</p>
     {% endfor %}
   </div>
 </section>

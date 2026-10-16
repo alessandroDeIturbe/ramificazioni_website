@@ -52,7 +52,6 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.i18n",
                 "concerti.context_processors.sostenitori",
-                "concerti.context_processors.stagioni_nav",
                 "concerti.context_processors.legale",
             ],
         },

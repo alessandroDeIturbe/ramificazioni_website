@@ -142,6 +142,10 @@ class Brano(models.Model):
     prima_esecuzione_tipo = models.CharField(
         "prima esecuzione", max_length=20, choices=PRIMA_ESECUZIONE_CHOICES, blank=True, default=""
     )
+    commissione = models.BooleanField(
+        "commissione Ramificazioni", default=False, db_default=False,
+        help_text="Brano scritto su commissione di Ramificazioni: compare in Archivio > Commissioni.",
+    )
     ordine = models.PositiveIntegerField(default=0)
 
     class Meta:

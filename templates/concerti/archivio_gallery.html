@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Photo Gallery" %} — {% trans "Archivio" %} — Ramificazioni{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>{% trans "Photo Gallery" %}</h1>
+</section>
+
+{% for c in concerti %}
+<section>
+  <h2><a href="{% url 'concerti:event_detail' c.slug %}">{{ c.stagione }} · {{ c.data|date:"d F Y" }}</a></h2>
+  <div class="event-gallery" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;">
+    {% for f in c.foto.all %}
+    <img src="{{ f.immagine.url }}" alt="{{ f.didascalia }}" loading="lazy" style="width:100%; aspect-ratio:3/2; object-fit:cover;">
+    {% endfor %}
+  </div>
+</section>
+{% empty %}
+<p>{% trans "Le fotografie verranno pubblicate a breve." %}</p>
+{% endfor %}
+
+{% endblock %}

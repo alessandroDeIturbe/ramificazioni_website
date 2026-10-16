@@ -321,3 +321,14 @@ Deploy (`../deploy-ramificazioni.sh`, fuori da git; copia pre-modifica: `deploy-
 - `enable-preview` (una tantum): aggiunge il blocco `anteprima.<dominio>` a Caddy, valida e ricarica. NON ancora eseguito.
 Da fare dall'utente: record DNS A 179.237.121.137 e AAAA 2001:1600:18:20c::224 per `anteprima.ramificazioni.ch`, poi deploy del codice e `enable-preview`.
 Nota: `preview`/`update` eseguono `migrate` sul DB condiviso: le migrazioni toccano anche il sito live.
+
+### Nuova navigazione e Archivio (2026-10-16) — committato, NON pushato/deployato
+Navbar: Home · Chi siamo · Stagione · Contatti · Sostenitori · Archivio (menu a tendina). Tolti il menu «Stagioni» e «Collaboratori».
+- **Stagione** (`/events/`, `events_list`): solo la stagione dell'ultimo concerto pubblicato; le precedenti stanno in Archivio.
+- **Archivio** (`/archivio/`) con sottopagine: `edizioni` (tutte le stagioni raggruppate, link a `stagioni/<stagione>/` ed eventi), `commissioni`
+  (brani con flag `Brano.commissione`, un'unica lista = «brani scritti per Ramificazioni»), `compositori`, `interpreti` (interpreti + regia audio),
+  `photo-gallery` (tutte le `FotoConcerto` per concerto). Template `archivio*.html`, link condivisi in `_archivio_links.html`.
+- `/contributors/` ora fa redirect 301 a `/archivio/interpreti/`. Rimossi `contributors.html` e il context processor `stagioni_nav`.
+- Migrazione `0004_brano_commissione` (BooleanField con `db_default=False`: il codice vecchio sul DB condiviso continua a funzionare). `preview`/`update` la applicano
+  anche al DB del sito live. Nell'admin il flag «commissione Ramificazioni» è nell'inline dei brani: va spuntato a mano sui brani commissionati.
+- Traduzioni EN/DE/FR aggiunte (`.mo` generati con script Python, vedi nota sopra).

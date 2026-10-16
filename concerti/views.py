@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 
 from .forms import SponsorInquiryForm
-from .models import Concerto, Persona, Sostenitore
+from .models import Brano, Concerto, FotoConcerto, Persona, Sostenitore
 
 
 def home(request):
@@ -13,9 +13,10 @@ def home(request):
 
 
 def events_list(request):
-    futuri = Concerto.objects.futuri().select_related("sede")
-    passati = Concerto.objects.passati().select_related("sede")
-    return render(request, "concerti/events_list.html", {"futuri": futuri, "passati": passati})
+    """Stagione corrente = quella dell'ultimo concerto pubblicato; le precedenti stanno in Archivio."""
+    stagione = Concerto.objects.pubblicati().order_by("-data").values_list("stagione", flat=True).first()
+    concerti = Concerto.objects.pubblicati().filter(stagione=stagione).select_related("sede").order_by("data")
+    return render(request, "concerti/events_list.html", {"stagione": stagione, "concerti": concerti})
 
 
 def event_detail(request, slug):
@@ -41,8 +42,42 @@ def about(request):
 
 
 def contributors(request):
-    persone = Persona.objects.exclude(ruolo="direzione").prefetch_related("concerti")
-    return render(request, "concerti/contributors.html", {"persone": persone})
+    return redirect("concerti:archivio_interpreti", permanent=True)  # vecchio URL
+
+
+def archivio(request):
+    return render(request, "concerti/archivio.html")
+
+
+def archivio_edizioni(request):
+    concerti = Concerto.objects.pubblicati().select_related("sede").order_by("-data")
+    return render(request, "concerti/archivio_edizioni.html", {"concerti": concerti})
+
+
+def archivio_commissioni(request):
+    brani = (
+        Brano.objects.filter(commissione=True, concerto__pubblicato=True)
+        .select_related("concerto")
+        .order_by("-concerto__data", "ordine")
+    )
+    return render(request, "concerti/archivio_commissioni.html", {"brani": brani})
+
+
+def archivio_compositori(request):
+    persone = Persona.objects.filter(ruolo="compositore").prefetch_related("concerti")
+    return render(request, "concerti/archivio_persone.html", {"titolo": _("Compositori"), "persone": persone})
+
+
+def archivio_interpreti(request):
+    persone = Persona.objects.filter(ruolo__in=["interprete", "regia_audio"]).prefetch_related("concerti")
+    return render(request, "concerti/archivio_persone.html", {"titolo": _("Interpreti"), "persone": persone})
+
+
+def archivio_gallery(request):
+    concerti = (
+        Concerto.objects.pubblicati().filter(foto__isnull=False).distinct().order_by("-data").prefetch_related("foto")
+    )
+    return render(request, "concerti/archivio_gallery.html", {"concerti": concerti})
 
 
 def contacts(request):

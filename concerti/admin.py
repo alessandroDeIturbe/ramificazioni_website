@@ -34,7 +34,7 @@ def _lingua_sorgente(persona):
 class BranoInline(admin.TabularInline):
     model = Brano
     extra = 1
-    fields = ["ordine", "compositore", "titolo", "prima_esecuzione_tipo"]
+    fields = ["ordine", "compositore", "titolo", "prima_esecuzione_tipo", "commissione"]
 
 
 class PartecipazioneInline(admin.TabularInline):

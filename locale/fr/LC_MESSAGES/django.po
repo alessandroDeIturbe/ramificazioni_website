@@ -350,6 +350,48 @@ msgstr "Les données saisies ne servent qu'à vous répondre et sont conservées
 msgid "Telefono"
 msgstr "Téléphone"
 
+msgid "Archivio"
+msgstr "Archives"
+
+msgid "Edizioni"
+msgstr "Éditions"
+
+msgid "Commissioni"
+msgstr "Commandes"
+
+msgid "Compositori"
+msgstr "Compositeurs"
+
+msgid "Photo Gallery"
+msgstr "Galerie photo"
+
+msgid "Brani scritti per Ramificazioni."
+msgstr "Œuvres écrites pour Ramificazioni."
+
+msgid "La storia del festival: edizioni, commissioni, compositori, interpreti e fotografie."
+msgstr "L'histoire du festival : éditions, commandes, compositeurs, interprètes et photographies."
+
+msgid "Edizioni precedenti nell'Archivio"
+msgstr "Éditions précédentes dans les archives"
+
+msgid "Le commissioni verranno pubblicate a breve."
+msgstr "Les commandes seront publiées prochainement."
+
+msgid "Le fotografie verranno pubblicate a breve."
+msgstr "Les photographies seront publiées prochainement."
+
+msgid "Le schede verranno pubblicate a breve."
+msgstr "Les fiches seront publiées prochainement."
+
+msgid "Nessun concerto pubblicato al momento."
+msgstr "Aucun concert publié pour le moment."
+
+msgid "Nessuna edizione pubblicata al momento."
+msgstr "Aucune édition publiée pour le moment."
+
+msgid "Nessun concerto pubblicato per questa stagione."
+msgstr "Aucun concert publié pour cette saison."
+
 #~ msgid "About"
 #~ msgstr "À propos"
 
