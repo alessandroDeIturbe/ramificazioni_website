@@ -345,6 +345,9 @@ msgstr "Responsible person"
 msgid "I dati inseriti sono usati solo per risponderti e conservati al massimo 12 mesi. Vedi la <a href=\"%(privacy_url)s\">privacy policy</a>."
 msgstr "The data you enter is used only to reply to you and kept for 12 months at most. See the <a href=\"%(privacy_url)s\">privacy policy</a>."
 
+msgid "Telefono"
+msgstr "Phone"
+
 #~ msgid "About"
 #~ msgstr "About"
 

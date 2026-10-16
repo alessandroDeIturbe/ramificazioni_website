@@ -5,7 +5,7 @@
 
 <section class="intro">
   <h1>{% trans "Informativa sulla privacy" %}</h1>
-  <p>{% trans "Titolare del trattamento" %}: <strong>{% trans "DA COMPLETARE" %}</strong> — <a href="mailto:info.ramificazioni@gmail.com">info.ramificazioni@gmail.com</a></p>
+  <p>{% trans "Titolare del trattamento" %}: <strong>{{ legale.titolare|default:_("DA COMPLETARE") }}</strong> — <a href="mailto:{{ legale.email }}">{{ legale.email }}</a></p>
 </section>
 
 <section>

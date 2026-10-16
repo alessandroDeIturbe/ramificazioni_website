@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db.models import Max
 
 from .models import Concerto, Sostenitore
@@ -17,3 +18,8 @@ def stagioni_nav(request):
         .order_by("-ultima_data")
     )
     return {"stagioni_nav": stagioni}
+
+
+def legale(request):
+    """Dati legali (titolare, indirizzo...) per le pagine Privacy e Impressum."""
+    return {"legale": settings.LEGAL}

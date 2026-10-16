@@ -303,3 +303,9 @@ backup della vecchia storia nel branch `backup/pre-realign-11609da`.
 - `scripts/backup-db.sh`: rotazione 30 giorni (ma il backup su questa prod è ancora da riscrivere: usa docker).
 - Traduzioni EN/DE/FR aggiunte ai `.po`; `msgfmt` NON è installato sulla VPS: i `.mo` sono stati generati con uno script Python (verificato che le stringhe si caricano). Meglio rigenerarli con `compilemessages` dove c'è gettext.
 Resta: compilare i dati «DA COMPLETARE», verificare log Caddy (nessuna direttiva `log`), liberatorie, tier Gemini, deploy.
+
+### Dati legali da .env (2026-10-16)
+Privacy/Impressum leggono titolare, ragione sociale, indirizzo, responsabile, telefono (opz.), email da `settings.LEGAL`
+(variabili `LEGAL_*` nel `.env`, non in git; context processor `concerti.context_processors.legale`). Se vuote, i template
+mostrano «DA COMPLETARE». Si compilano con `./scripts/compila-dati-legali.sh` (chiede i dati, valida, fa backup `.env.bak`,
+scrive nel `.env` condiviso da blue e green). Dopo averlo eseguito: deploy/restart del servizio, i valori si leggono all'avvio.

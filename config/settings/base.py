@@ -52,6 +52,7 @@ TEMPLATES = [
                 "django.template.context_processors.i18n",
                 "concerti.context_processors.sostenitori",
                 "concerti.context_processors.stagioni_nav",
+                "concerti.context_processors.legale",
             ],
         },
     },
@@ -114,5 +115,12 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "info.ramificazioni@gmail.com")
 SPONSOR_INQUIRY_EMAIL = os.environ.get("SPONSOR_INQUIRY_EMAIL", DEFAULT_FROM_EMAIL)
+
+# Dati per Privacy/Impressum: compilati da scripts/compila-dati-legali.sh nel .env (non in git).
+LEGAL = {
+    k: os.environ.get(f"LEGAL_{k.upper()}", "")
+    for k in ("titolare", "ragione_sociale", "indirizzo", "responsabile", "telefono", "email")
+}
+LEGAL["email"] = LEGAL["email"] or DEFAULT_FROM_EMAIL
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
